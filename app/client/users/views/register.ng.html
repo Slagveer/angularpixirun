@@ -1,0 +1,39 @@
+<section class="topSpace">
+    <div class="container">
+        <header>
+            <h1>
+                <p>Sign Up</p>
+            </h1>
+        </header>
+        <div class="row">
+            <div class="col-md-12">
+              <form>
+                <div class="input-group">
+                  <span class="input-group-addon">username</span>
+                  <input class="form-control" type="text" ng-model="ac.credentials.username" placeholder="username" aria-label="username">
+                </div><!-- /input-group -->
+                <p></p>
+                <div class="input-group">
+                  <span class="input-group-addon">email</span>
+                  <input class="form-control" type="email" ng-model="ac.credentials.email" placeholder="email" aria-label="email">
+                </div><!-- /input-group -->
+                <p></p>
+                <div class="input-group">
+                  <span class="input-group-addon">password</span>
+                  <input class="form-control" type="password" ng-model="ac.credentials.password" placeholder="password" aria-label="password">
+                </div><!-- /input-group -->
+                <p></p>
+                <div class="input-group">
+                  <button type="button" class="btn btn-default" ng-click="ac.register()" aria-label="register">Create account</button>
+                </div>
+              </form>
+              <div layout="row" layout-align="space-around center">
+                <a ui-sref="login">Login</a>
+              </div>
+              <div ng-show="ac.error">
+                <small>{{ ac.error }}</small>
+              </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,24 @@
+<nav class="navbar navbar-fixed-top navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navigation">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" ui-sref="home" ng-click="scrollSmoothToTop()"><span id="toolbarTitle">angularPixirun</span></a>
+        </div>
+
+        <div id="navigation" class="collapse navbar-collapse">
+
+            <ul class="nav navbar-nav navbar-right pull-right">
+                <li><a ui-sref="login" ng-if="$root.currentUser == null">Login</a></li>
+                <li><a ui-sref="register" ng-if="$root.currentUser == null">Sign up</a></li>
+                <li><a ui-sref="logout" ng-if="$root.currentUser">Logout</a></li>
+                <li><a ui-sref="changepw" ng-if="$root.currentUser">Change Password</a></li>
+                <li><a ng-href="/resetpw/{{$root.currentUser._id}}" ng-if="$root.currentUser">User: <span ng-bind="$root.currentUser.username"></span></a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
