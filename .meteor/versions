@@ -36,6 +36,8 @@ ejson@1.0.7
 email@1.0.7
 es5-shim@4.1.13
 fastclick@1.0.7
+fds:pixijs@3.0.6_1
+fds:tweenjs@0.10.0_2
 geojson-utils@1.0.4
 hot-code-push@1.0.0
 html-tools@1.0.5
@@ -90,7 +92,6 @@ tracker@1.0.9
 twbs:bootstrap@3.3.5
 ui@1.0.8
 underscore@1.0.4
-urigo:angular-blaze-template@0.1.1
 url@1.0.5
 velocity:chokidar@1.2.0_1
 velocity:core@0.10.7
