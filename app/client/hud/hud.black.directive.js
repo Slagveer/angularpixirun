@@ -25,9 +25,9 @@
             //
         }
 
-        HudBlackViewController.$inject = ['$scope', 'RprEngineService'];
+        HudBlackViewController.$inject = ['$rootScope', '$scope', 'RprEngineService', 'ResizeService'];
 
-        function HudBlackViewController($scope, RprEngineService) {
+        function HudBlackViewController($rootScope, $scope, RprEngineService, ResizeService) {
             var vm = this;
             
             vm.engine = RprEngineService;
@@ -46,6 +46,13 @@
             $scope.$on('update', function updateEvent() {
                 //console.log(vm.container);
             });
+
+            ResizeService.subscribe($rootScope, resized);
+
+            function resized(event, data) {
+                vm.black.scale.x = ResizeService.newWidth/16;
+                vm.black.scale.y = ResizeService.h/16;
+            }
         }
 
         return directive;

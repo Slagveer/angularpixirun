@@ -25,9 +25,9 @@
             //
         }
 
-        HudCountDownViewController.$inject = ['$scope', 'RprEngineService'];
+        HudCountDownViewController.$inject = ['$rootScope', '$scope', 'RprEngineService', 'ResizeService'];
 
-        function HudCountDownViewController($scope, RprEngineService) {
+        function HudCountDownViewController($rootScope, $scope, RprEngineService, ResizeService) {
             var vm = this;
             
             vm.engine = RprEngineService;
@@ -44,6 +44,13 @@
             $scope.$on('update', function updateEvent() {
                 //console.log(vm.container);
             });
+
+            ResizeService.subscribe($rootScope, resized);
+
+            function resized(event, data) {
+                vm.countdown.position.x = ResizeService.newWidth / 2;
+                vm.countdown.position.y = ResizeService.h/2;
+            }
         }
 
         return directive;

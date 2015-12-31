@@ -4,7 +4,8 @@
       Meteor
           .startup(function () {
             angular
-                .module('angularPixirun').config(config);
+                .module('angularPixirun')
+                .config(config);
 
             config.$inject = ['$urlRouterProvider', '$stateProvider', '$interpolateProvider'];
 

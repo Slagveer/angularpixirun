@@ -9,6 +9,7 @@
                 'game',
                 'rprengine',
                 'hud',
-                'controls'
+                'controls',
+                'background'
             ]);
 })();

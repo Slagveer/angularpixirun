@@ -33,12 +33,20 @@
             var vm = this;
 
             vm.init = init;
-            vm.showGame = true;
+            vm.prevState = false;
 
             $scope.$on('stressTestFinished', function stressTestFinished(evt, data) {
                 vm.interactive = false;
                 $document[0].body.scroll = "no";
                 init();
+            });
+
+            $scope.$on('pausePressed', function stressTestFinished(evt, data) {
+                if(vm.gameMode === GameConstants.GAME_MODE.PAUSED){
+                    vm.interactive = true;
+                    vm.gameMode = prevState;
+                    vm.prevState = false;
+                }
             });
 
             function init() {

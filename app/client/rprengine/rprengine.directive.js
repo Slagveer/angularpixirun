@@ -25,9 +25,9 @@
             element[0].appendChild(rprEngineViewController.renderer.view);
         }
 
-        RprEngineViewController.$inject = ['$scope', 'RprEngineService'];
+        RprEngineViewController.$inject = ['$rootScope', '$scope', '$window', 'RprEngineService', 'ResizeService'];
 
-        function RprEngineViewController($scope, RprEngineService) {
+        function RprEngineViewController($rootScope, $scope, $window, RprEngineService, ResizeService) {
             var vm = this;
 
             vm.engine = RprEngineService;
@@ -70,6 +70,18 @@
                 TWEEN.update();
                 vm.renderer.render(vm.stage);
             });
+
+            ResizeService.subscribe($rootScope, resized);
+
+            function resized(event, data) {
+                var view = vm.renderer.view;
+
+                data.window.scrollTo(0, 0);
+                view.style.height = ResizeService.h * ResizeService.ratio +"px";
+                view.style.width = ResizeService.width +"px";
+
+                vm.renderer.resize(ResizeService.newWidth , ResizeService.h);
+            }
         }
 
         return directive;

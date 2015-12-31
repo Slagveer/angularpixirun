@@ -10,9 +10,9 @@
                     .module('angularPixirun')
                     .controller('AppController', AppController);
 
-                AppController.$inject = ['$scope'];
+                AppController.$inject = ['$scope', '$window', '$document', 'ResizeService'];
 
-                function AppController($scope) {
+                function AppController($scope, $window, $document, ResizeService) {
                     var vm = this;
 
                     vm.hideStressTest = false;
@@ -20,7 +20,15 @@
                     $scope.$on('stressTestFinished', function stressTestFinished(evt, data) {
                         vm.hideStressTest = true;
                         $scope.$apply();
+                        // Send a default resize event
+                        ResizeService.notify($window, $document);
                     });
+
+                    angular.element($window).bind('resize', resize);
+
+                    function resize() {
+                        ResizeService.notify($window, $document);
+                    }
                 }
             });
     }

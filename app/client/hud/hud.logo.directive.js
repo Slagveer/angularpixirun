@@ -25,9 +25,9 @@
             //
         }
 
-        HudLogoViewController.$inject = ['$scope', 'RprEngineService'];
+        HudLogoViewController.$inject = ['$rootScope', '$scope', 'RprEngineService', 'ResizeService'];
 
-        function HudLogoViewController($scope, RprEngineService) {
+        function HudLogoViewController($rootScope, $scope, RprEngineService, ResizeService) {
             var vm = this;
             
             vm.engine = RprEngineService;
@@ -42,6 +42,13 @@
             $scope.$on('update', function updateEvent() {
                 //
             });
+
+            ResizeService.subscribe($rootScope, resized);
+
+            function resized(event, data) {
+                vm.logo.position.x = ResizeService.newWidth / 2;
+                vm.logo.position.y = ResizeService.h/2 - 20;
+            }
         }
 
         return directive;

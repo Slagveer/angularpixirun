@@ -34,7 +34,7 @@
             AssetsLoadService.load(GameConstants.GAME_ASSETS).then(function(){
                 vm.pauseButton = new PIXI.Sprite.fromImage("pause.png");
                 vm.pauseButton.interactive = true;
-                vm.pauseButton.anchor.x = 0.5;vm.pauseButton.x = 300;
+                vm.pauseButton.anchor.x = 0.5;
                 vm.pauseButton.anchor.y = 0.5;
                 vm.pauseButton.alpha = 0;
                 vm.pauseButton.visible = false;
@@ -48,7 +48,7 @@
                         }, 500)
                         .easing(TWEEN.Easing.Elastic.Out)
                         .start();
-                    $rootScope.$broadcast('PausePressed');
+                    $rootScope.$broadcast('pausePressed');
                 }
                 vm.container.addChild(vm.pauseButton);
             });
