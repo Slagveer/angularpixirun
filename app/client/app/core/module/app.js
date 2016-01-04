@@ -10,6 +10,8 @@
                 'rprengine',
                 'hud',
                 'controls',
-                'background'
+                'background',
+                'lava',
+                'steve'
             ]);
 })();

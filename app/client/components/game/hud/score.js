@@ -59,7 +59,7 @@ GAME.Score.prototype.setScore = function(score)
 	{
 		var digit = this.digits[i];
 		digit.visible = true;
-		digit.setTexture(this.glyphs[split[i]]);
+		digit.texture = (this.glyphs[split[i]]);
 		digit.position.x = position; 
 		position += digit.width + gap;
 	}

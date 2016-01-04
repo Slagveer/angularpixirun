@@ -4,10 +4,9 @@
         angular
             .module('rprengine')
             .value({
-                'RprEngineValues': {
-                    LOW_MODE: false,
-                    HIGH_MODE: false,
-                    XOFFSET: 0
+                'GameValues': {
+                    CAMERA: null,
+                    INTERACTIVE: false
                 }
             });
     }

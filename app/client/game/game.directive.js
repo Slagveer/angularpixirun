@@ -26,24 +26,26 @@
         }
 
         GameViewController.$inject = ['$interval', '$document', '$scope', '$window', '$state', 'GameConstants',
-                'RprEngineService', 'AssetsLoadService', 'RprEngineValues'];
+                'RprEngineService', 'AssetsLoadService', 'RprEngineValues', 'GameValues'];
 
         function GameViewController($interval, $document, $scope, $window, $state, GameConstants,
-                                    RprEngineService, AssetsLoadService, RprEngineValues) {
+                                    RprEngineService, AssetsLoadService, RprEngineValues, GameValues) {
             var vm = this;
 
             vm.init = init;
             vm.prevState = false;
 
+            GameValues.gameMode = GameConstants.GAME_MODE.TITLE;
+
             $scope.$on('stressTestFinished', function stressTestFinished(evt, data) {
-                vm.interactive = false;
+                GameValues.interactive = false;
                 $document[0].body.scroll = "no";
                 init();
             });
 
             $scope.$on('pausePressed', function stressTestFinished(evt, data) {
                 if(vm.gameMode === GameConstants.GAME_MODE.PAUSED){
-                    vm.interactive = true;
+                    GameValues.interactive = true;
                     vm.gameMode = prevState;
                     vm.prevState = false;
                 }
@@ -59,7 +61,7 @@
                 }
 
                 $scope.$on('countdownCompleted', function countdownCompleted() {
-                    vm.interactive = true;
+                    GameValues.interactive = true;
                     vm.gameMode = GameConstants.GAME_MODE.PLAYING;
                     $scope.$broadcast('showPause');
                 });
@@ -72,13 +74,13 @@
             }
 
             function update() {
-                RprEngineService.send('update');
+                RprEngineService.update();
                 requestAnimationFrame(update);
             }
 
             function onSucces(data) {
                 vm.gameMode = GameConstants.GAME_MODE.INTRO;
-                vm.interactive = false;
+                GameValues.interactive = false;
             }
 
             function onError(error) {

@@ -30,7 +30,10 @@
         function RprEngineViewController($rootScope, $scope, $window, RprEngineService, ResizeService) {
             var vm = this;
 
+            vm.joyrideComplete = joyrideComplete;
             vm.engine = RprEngineService;
+            vm.count = 0;
+            vm.zoom = 1;
             vm.renderer = PIXI.autoDetectRenderer($window.innerWidth, $window.innerHeight);
             vm.renderer.view.style.position = "absolute";
             vm.renderer.view.webkitImageSmoothingEnabled = false;
@@ -50,6 +53,9 @@
             vm.stage.addChild(vm.container);
             vm.stage.addChild(vm.hud);
 
+            vm.white = PIXI.Sprite.fromImage("whiteSquare.jpg");
+
+            RprEngineValues.XOFFSET = vm.container.position.x;
             RprEngineValues.HIGH_MODE = (vm.renderer instanceof PIXI.WebGLRenderer);
 
             if (RprEngineValues.LOW_MODE === true) {
@@ -81,6 +87,17 @@
                 view.style.width = ResizeService.width +"px";
 
                 vm.renderer.resize(ResizeService.newWidth , ResizeService.h);
+            }
+
+            function joyrideComplete() {
+                vm.stage.addChild(vm.white)
+                vm.white.alpha = 1;
+
+                new TWEEN.Tween(vm.white).to({
+                        alpha : 0,
+                    }, 0.5)
+                    .easing(TWEEN.Easing.Sine.Out)
+                    .start();
             }
         }
 

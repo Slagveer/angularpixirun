@@ -3,8 +3,6 @@
  * v2 by Tom Slezakowski
  */
 
-//var GAME = GAME || {};
-
 if (typeof(GAME) === 'undefined') {
     this.GAME = {};
 }

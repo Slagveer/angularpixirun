@@ -32,15 +32,11 @@
             
             vm.engine = RprEngineService;
             AssetsLoadService.load(GameConstants.GAME_ASSETS).then(function(){
-                vm.logo = PIXI.Sprite.fromFrame("runLogo.png");
-                vm.logo.anchor.x = 0.5;
-                vm.logo.anchor.y = 0.5;
-                //vm.logo.alpha = 0;
-                vm.container.addChild(vm.logo);
+                vm.score = new GAME.Score();
+                vm.score.position.x = 300;
+                vm.score.alpha = 0;
+                vm.container.addChild(vm.score);
             });
-            //vm.score = new GAME.Score();
-            //vm.score.setScore(100);
-            //vm.container.addChild(vm.score);
 
             $scope.$on('update', function updateEvent() {
                 //console.log(vm.container);

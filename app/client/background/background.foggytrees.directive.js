@@ -32,13 +32,12 @@
             
             vm.engine = RprEngineService;
             AssetsLoadService.load(GameConstants.GAME_ASSETS).then(function(){
-                //vm.foggyTrees = new GAME.BackgroundElement(PIXI.Texture.fromFrame("05_far_BG.jpg"), 40, vm.container);
-                //vm.foggyTrees.speed = 1/2;
-                //vm.container.addChild(vm.foggyTrees);
+                vm.foggyTrees = new GAME.BackgroundElement(PIXI.Texture.fromFrame("05_far_BG.jpg"), 40, vm.container);
+                vm.foggyTrees.speed = 1/2;
             });
 
             $scope.$on('update', function updateEvent() {
-                //vm.foggyTrees.setPosition(vm.scrollPosition);
+                //
             });
         }
 

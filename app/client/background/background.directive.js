@@ -24,18 +24,41 @@
             //
         }
 
-        BackgroundViewController.$inject = ['$scope', '$window', '$state', 'RprEngineService'];
+        BackgroundViewController.$inject = ['$rootScope', '$scope', '$window', '$state', 'RprEngineService',
+            'ResizeService', 'BackgroundConstants', 'GameValues'];
 
-        function BackgroundViewController($scope, $window, $state, RprEngineService) {
+        function BackgroundViewController($rootScope, $scope, $window, $state, RprEngineService,
+                                          ResizeService, BackgroundConstants, GameValues) {
             var vm = this;
 
+            vm.joyrideComplete = joyrideComplete;
             vm.engine = RprEngineService;
-            vm.background = new GAME.Background();
+            vm.normalBackground = new GAME.Background(GameValues.CAMERA);
+            vm.joyBackground = new GAME.JoyBackground(GameValues.CAMERA);
+            vm.background = vm.normalBackground;
+            vm.background.on('backgroundUpdated', function backgroundUpdated(data) {
+                $scope.$broadcast('updateTransform', {
+                    scrollPosition: data.scrollPosition
+                });
+            });
+            vm.vines = BackgroundConstants.VINES;
             vm.container.addChild(vm.background);
 
             $scope.$on('update', function updateEvent() {
-                //
+
             });
+
+            ResizeService.subscribe($rootScope, resized);
+
+            function resized(event, data) {
+                vm.background.width = ResizeService.newWidth;
+            }
+
+            function joyrideComplete() {
+                vm.container.removeChild(vm.background);
+                vm.background = this.normalBackground;
+                vm.container.addChildAt(vm.background, 0);
+            }
         }
 
         return directive;
