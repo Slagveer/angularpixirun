@@ -35,7 +35,7 @@
             vm.init = init;
             vm.prevState = false;
 
-            GameValues.gameMode = GameConstants.GAME_MODE.TITLE;
+            GameValues.GAMEMODE = GameConstants.GAME_MODE.TITLE;
 
             $scope.$on('stressTestFinished', function stressTestFinished(evt, data) {
                 GameValues.interactive = false;
@@ -44,7 +44,7 @@
             });
 
             $scope.$on('pausePressed', function stressTestFinished(evt, data) {
-                if(vm.gameMode === GameConstants.GAME_MODE.PAUSED){
+                if(GameValues.GAMEMODE === GameConstants.GAME_MODE.PAUSED){
                     GameValues.interactive = true;
                     vm.gameMode = prevState;
                     vm.prevState = false;
@@ -52,7 +52,7 @@
             });
 
             function init() {
-                vm.gameMode = GameConstants.GAME_MODE.INTRO;
+                GameValues.GAMEMODE = GameConstants.GAME_MODE.INTRO;
                 vm.game = RprEngineService;
 
                 if(!AssetsLoadService.loaded) {
@@ -62,7 +62,7 @@
 
                 $scope.$on('countdownCompleted', function countdownCompleted() {
                     GameValues.interactive = true;
-                    vm.gameMode = GameConstants.GAME_MODE.PLAYING;
+                    GameValues.GAMEMODE = GameConstants.GAME_MODE.PLAYING;
                     $scope.$broadcast('showPause');
                 });
 
@@ -79,7 +79,7 @@
             }
 
             function onSucces(data) {
-                vm.gameMode = GameConstants.GAME_MODE.INTRO;
+                GameValues.GAMEMODE = GameConstants.GAME_MODE.INTRO;
                 GameValues.interactive = false;
             }
 

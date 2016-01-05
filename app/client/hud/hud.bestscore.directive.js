@@ -25,9 +25,9 @@
             //
         }
 
-        HudBestScoreViewController.$inject = ['$scope', 'RprEngineService'];
+        HudBestScoreViewController.$inject = ['$rootScope', '$scope', 'RprEngineService', 'ResizeService'];
 
-        function HudBestScoreViewController($scope, RprEngineService) {
+        function HudBestScoreViewController($rootScope, $scope, RprEngineService, ResizeService) {
             var vm = this;
             
             vm.engine = RprEngineService;
@@ -40,6 +40,13 @@
             $scope.$on('update', function updateEvent() {
                 //console.log(vm.container);
             });
+
+            ResizeService.subscribe($rootScope, resized);
+
+            function resized(event, data) {
+                vm.bestScore.position.x = ResizeService.newWidth - 20;
+                vm.bestScore.position.y = 100;
+            }
         }
 
         return directive;

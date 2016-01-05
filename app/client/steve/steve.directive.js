@@ -26,11 +26,11 @@
 
         SteveViewController.$inject = ['$rootScope', '$scope', '$window', '$state', 'RprEngineService',
             'ResizeService', 'SteveConstants', 'GameConstants', 'AssetsLoadService',
-            'RprEngineValues', 'GameValues', 'TimeService'];
+            'RprEngineValues', 'GameValues', 'SteveValues', 'TimeService'];
 
         function SteveViewController($rootScope, $scope, $window, $state, RprEngineService,
                                     ResizeService, SteveConstants, GameConstants, AssetsLoadService,
-                                     RprEngineValues, GameValues, TimeService) {
+                                     RprEngineValues, GameValues, SteveValues, TimeService) {
             var vm = this;
             var amount = SteveConstants.AMOUNT;
             var texture = null;
@@ -50,11 +50,12 @@
             AssetsLoadService.load(GameConstants.GAME_ASSETS).then(function(){
                 vm.steve = new GAME.Steve(SteveConstants.RUNNINGFRAMES, SteveConstants.FLYINGFRAMES, SteveConstants.CRASHFRAMES);
                 vm.steve.view.visible =  false;
+                SteveValues.STEVE = vm.steve;
                 vm.container.addChild(vm.steve.view);
             });
 
             $scope.$on('update', function updateEvent() {
-                if(GameValues.gameMode !== GameConstants.GAME_MODE.PAUSED) {
+                if(GameValues.GAMEMODE !== GameConstants.GAME_MODE.PAUSED) {
                     RprEngineService.levelCount += TimeService.DELTA_TIME;
                     if(RprEngineService.levelCount > (60 * 60)) {
                         vm.steve.level += 0.05;

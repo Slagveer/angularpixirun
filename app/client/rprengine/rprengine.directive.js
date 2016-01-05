@@ -25,9 +25,9 @@
             element[0].appendChild(rprEngineViewController.renderer.view);
         }
 
-        RprEngineViewController.$inject = ['$rootScope', '$scope', '$window', 'RprEngineService', 'ResizeService'];
+        RprEngineViewController.$inject = ['$rootScope', '$scope', '$window', 'RprEngineService', 'ResizeService', 'GameConstants', 'GameValues', 'SteveValues'];
 
-        function RprEngineViewController($rootScope, $scope, $window, RprEngineService, ResizeService) {
+        function RprEngineViewController($rootScope, $scope, $window, RprEngineService, ResizeService, GameConstants, GameValues, SteveValues) {
             var vm = this;
 
             vm.joyrideComplete = joyrideComplete;
@@ -58,14 +58,23 @@
             RprEngineValues.XOFFSET = vm.container.position.x;
             RprEngineValues.HIGH_MODE = (vm.renderer instanceof PIXI.WebGLRenderer);
 
-            if (RprEngineValues.LOW_MODE === true) {
-                //vm.normalBackground = new GAME.LowFiBackground();
-            } else {
-                // vm.normalBackground = new GAME.Background(this.gameFront);
+            vm.container.mousedown = vm.container.touchstart = function(event) {
+                //event.preventDefault();
+                if (event.target.type !== 'button'){
+                    if(!GameValues.INTERACTIVE) {
+                        return;
+                    }
+                    if(GameValues.GAMEMODE === GameConstants.GAME_MODE.INTRO){
+                        GameValues.INTERACTIVE = false;
+                        GameValues.GAMEMODE =  GameConstants.GAME_MODE.TITLE;
+                    }
+
+                    vm.engine.tap(event);
+                }
             }
 
             $scope.$on('countdownCompleted', function countdownCompleted() {
-                //
+                GameValues.INTERACTIVE = true;
             });
 
             $scope.$on('stressTestFinished', function stressTestFinished(evt, data) {
@@ -74,6 +83,35 @@
 
             $scope.$on('update', function updateEvent() {
                 TWEEN.update();
+                vm.count += 0.01;
+
+                if(!GameValues.LOW_MODE) {
+                    var ratio = (vm.zoom-1);
+                    var position = -ResizeService.width/2;
+                    var position2 = -SteveValues.STEVE.view.position.x;
+                    var inter = position + (position2 - position) * ratio;
+
+                    vm.container.position.x = inter * vm.zoom ;
+                    vm.container.position.y = -SteveValues.STEVE.view.position.y * vm.zoom ;
+
+                    vm.container.position.x += ResizeService.width/2;
+                    vm.container.position.y += ResizeService.height/2;
+
+                    RprEngineValues.XOFFSET = vm.container.position.x;
+
+                    if(vm.container.position.y > 0) {
+                        vm.container.position.y = 0;
+                    }
+                    var yMax = -ResizeService.height * this.zoom ;
+                    yMax += ResizeService.height;
+
+                    if(vm.container.position.y < yMax) {
+                        vm.container.position.y = yMax;
+                    }
+
+                    vm.container.scale.x = vm.zoom ;
+                    vm.container.scale.y = vm.zoom ;
+                }
                 vm.renderer.render(vm.stage);
             });
 
@@ -87,6 +125,9 @@
                 view.style.width = ResizeService.width +"px";
 
                 vm.renderer.resize(ResizeService.newWidth , ResizeService.h);
+
+                vm.white.scale.x = ResizeService.newWidth/16;
+                vm.white.scale.y = ResizeService.height/16;
             }
 
             function joyrideComplete() {

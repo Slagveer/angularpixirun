@@ -26,11 +26,11 @@
 
         SteveTrailFireViewController.$inject = ['$rootScope', '$scope', '$window', '$state', 'RprEngineService',
             'ResizeService', 'SteveConstants', 'GameConstants', 'AssetsLoadService',
-            'RprEngineValues', 'GameValues', 'TimeService'];
+            'RprEngineValues', 'GameValues', 'TimeService', 'SteveValues'];
 
         function SteveTrailFireViewController($rootScope, $scope, $window, $state, RprEngineService,
                                     ResizeService, SteveConstants, GameConstants, AssetsLoadService,
-                                     RprEngineValues, GameValues, TimeService) {
+                                     RprEngineValues, GameValues, TimeService, SteveValues) {
             var vm = this;
 
             AssetsLoadService.load(GameConstants.GAME_ASSETS).then(function(){
@@ -38,7 +38,7 @@
             });
 
             $scope.$on('update', function updateEvent() {
-
+                vm.trailFire.target = SteveValues.STEVE;
             });
 
             ResizeService.subscribe($rootScope, resized);

@@ -25,10 +25,10 @@
         }
 
         LavaViewController.$inject = ['$rootScope', '$scope', '$window', '$state', 'RprEngineService',
-            'ResizeService', 'LavaConstants', 'GameConstants', 'AssetsLoadService', 'RprEngineValues'];
+            'ResizeService', 'LavaConstants', 'GameConstants', 'AssetsLoadService', 'RprEngineValues', 'GameValues'];
 
         function LavaViewController($rootScope, $scope, $window, $state, RprEngineService,
-        ResizeService, LavaConstants, GameConstants, AssetsLoadService, RprEngineValues) {
+        ResizeService, LavaConstants, GameConstants, AssetsLoadService, RprEngineValues, GameValues) {
             var vm = this;
             var amount = LavaConstants.AMOUNT;
             var texture = null;
@@ -42,24 +42,11 @@
             vm.textures = [];
 
             AssetsLoadService.load(GameConstants.GAME_ASSETS).then(function(){
-                for(var i=0;i<LavaConstants.TEXTURES.length;i++) {
-                    vm.textures.push(PIXI.Texture.fromFrame(LavaConstants.TEXTURES[i]));
-                }
-                texture = vm.textures[0];
-                vm.spriteWidth = texture.width - 1;
-                if(amount < 3){
-                    amount = 3;
-                }
-                for(var i=0;i<amount;i++){
-                    var sprite = new PIXI.Sprite(texture);
-                    sprite.position.y = 580;
-                    vm.container.addChild(sprite);
-                    vm.sprites.push(sprite);
-                };
+                vm.lava = new GAME.Lava(vm.container, LavaConstants.TEXTURES, RprEngineValues.XOFFSET);
             });
 
             $scope.$on('update', function updateEvent() {
-                //
+                vm.lava.setPosition(GameValues.CAMERA.x + 4000, RprEngineValues.XOFFSET);
             });
 
             ResizeService.subscribe($rootScope, resized);

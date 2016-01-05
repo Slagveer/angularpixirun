@@ -8,7 +8,6 @@
         .factory('RprEngineService', ['$q', '$rootScope', 'TimeService', 'GameValues', 'GameConstants', function($q, $rootScope, TimeService, GameValues, GameConstants) {
             GameValues.CAMERA = new PIXI.Point();
             var factory = {
-                gameMode: '',
                 bulletMult: 1,
                 pickupCount: 0,
                 score: 0,
@@ -34,7 +33,7 @@
                     }
                     GameValues.CAMERA.y = targetCamY;
 
-                    if (GameValues.gameMode === GameConstants.GAME_MODE.PAUSE) {
+                    if (GameValues.GAMEMODE === GameConstants.GAME_MODE.PAUSE) {
                         if (this.joyrideMode) {
                             this.joyrideCountdown -= TimeService.DELTA_TIME;
 
@@ -68,6 +67,9 @@
                     this.view.zoom = 1;
                     this.pickupCount = 0;
                     this.levelCount = 0;
+                },
+                tap: function () {
+                    this.send('tapped', {});
                 },
                 joyrideComplete: function() {
                     this.joyrideMode = false;

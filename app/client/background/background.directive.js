@@ -35,6 +35,11 @@
             vm.engine = RprEngineService;
             vm.normalBackground = new GAME.Background(GameValues.CAMERA);
             vm.joyBackground = new GAME.JoyBackground(GameValues.CAMERA);
+            if(GameValues.LOW_MODE) {
+                vm.normalBackground = new GAME.LowFiBackground();
+            } else {
+                vm.normalBackground = new GAME.Background(GameValues.CAMERA);
+            }
             vm.background = vm.normalBackground;
             vm.background.on('backgroundUpdated', function backgroundUpdated(data) {
                 $scope.$broadcast('updateTransform', {

@@ -39,6 +39,11 @@
             $scope.$on('update', function updateEvent() {
                 //
             });
+
+            $scope.$on('updateTransform', function updateTransformEvent(evt, data) {
+                vm.scrollPosition = data.scrollPosition;
+                vm.farCanopy.setPosition(vm.scrollPosition);
+            });
         }
 
         return directive;

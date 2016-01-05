@@ -25,9 +25,9 @@
             //
         }
 
-        HudPowerBarViewController.$inject = ['$scope', 'RprEngineService'];
+        HudPowerBarViewController.$inject = ['$rootScope', '$scope', 'RprEngineService', 'ResizeService'];
 
-        function HudPowerBarViewController($scope, RprEngineService) {
+        function HudPowerBarViewController($rootScope, $scope, RprEngineService, ResizeService) {
             var vm = this;
             
             vm.engine = RprEngineService;
@@ -38,8 +38,15 @@
             });
 
             $scope.$on('update', function updateEvent() {
-                //console.log(vm.container);
+                vm.powerBar.bar.scale.x = ( (vm.engine.pickupCount/(50 *  vm.engine.bulletMult) )*(248/252) )
             });
+
+            ResizeService.subscribe($rootScope, resized);
+
+            function resized(event, data) {
+                vm.powerBar.position.x = ResizeService.newWidth - 295;
+                vm.powerBar.position.y = 12;
+            }
         }
 
         return directive;

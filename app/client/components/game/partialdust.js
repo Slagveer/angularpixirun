@@ -22,7 +22,7 @@ ParticalDust = function()
 ParticalDust.globalCount = 0;
 ParticalDust.frames = ["mote01.png", "mote02.png", "mote03.png"];
 
-ParticalDust.constructor = Partical;
+ParticalDust.constructor = ParticalDust;
 ParticalDust.prototype = Object.create( PIXI.Sprite.prototype );
 
 

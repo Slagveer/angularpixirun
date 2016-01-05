@@ -53,7 +53,11 @@
                 vm.container.addChild(vm.pauseButton);
             });
 
-            $scope.$on('showPause', function showPaused() {
+            $scope.$on('update', function updateEvent() {
+                //console.log(vm.container);
+            });
+
+            $scope.$on('countdownCompleted', function countdownCompleted() {
                 vm.pauseButton.visible = true;
                 new TWEEN.Tween(vm.pauseButton).to({
                         alpha: 1
@@ -62,11 +66,6 @@
                         vm.pauseButton.interactive = true;
                     })
                     .start();
-
-            });
-
-            $scope.$on('update', function updateEvent() {
-                //console.log(vm.container);
             });
         }
 

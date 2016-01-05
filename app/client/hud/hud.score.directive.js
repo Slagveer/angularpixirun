@@ -25,9 +25,9 @@
             //
         }
 
-        HudScoreViewController.$inject = ['$scope', 'RprEngineService'];
+        HudScoreViewController.$inject = ['$rootScope', '$scope', 'RprEngineService', 'ResizeService'];
 
-        function HudScoreViewController($scope, RprEngineService) {
+        function HudScoreViewController($rootScope, $scope, RprEngineService, ResizeService) {
             var vm = this;
             
             vm.engine = RprEngineService;
@@ -39,8 +39,15 @@
             });
 
             $scope.$on('update', function updateEvent() {
-                //console.log(vm.container);
+                vm.score.setScore(Math.round(vm.engine.score));
             });
+
+            ResizeService.subscribe($rootScope, resized);
+
+            function resized(event, data) {
+                vm.score.position.x = ResizeService.newWidth - 295 - 20;
+                vm.score.position.y = 12;
+            }
         }
 
         return directive;
