@@ -36,9 +36,9 @@
                 vm.countdown.position.x = 200;
                 vm.countdown.position.y = 200;
                 vm.container.addChild(vm.countdown);
-                vm.countdown.startCountDown(function countdownCompleted(){
-                    $scope.$emit('countdownCompleted');
-                });
+                //vm.countdown.startCountDown(function countdownCompleted(){
+                //    $scope.$emit('countdownCompleted');
+                //});
             });
 
             $scope.$on('update', function updateEvent() {

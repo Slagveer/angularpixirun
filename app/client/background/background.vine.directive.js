@@ -35,8 +35,8 @@
             vm.setPosition = setPosition;
             vm.engine = RprEngineService;
             AssetsLoadService.load(GameConstants.GAME_ASSETS).then(function(){
-                vm.vine = PIXI.Sprite.fromFrame(vm.image);
-                vm.vine.offset = parseInt(vm.nr) * 100 + Math.random() * 50;
+                vm.vine = new PIXI.Sprite.fromFrame(vm.image);
+                vm.vine.offset = parseFloat(vm.nr) * 100 + Math.random() * 50;
                 vm.vine.speed = (1.5 + Math.random() * 0.25 )/2;
                 vm.vine.position.y = Math.random() * -200;
                 vm.vine.position.x = 200;
@@ -53,8 +53,8 @@
 
             function setPosition(position) {
                 var pos = -(position + vm.vine.offset) * vm.vine.speed;
-                pos %=  vm.container.width;
-                pos +=  vm.container.width;
+                pos %=  parseFloat(vm.container._width);
+                pos +=  parseFloat(vm.container._width);
                 vm.vine.position.x = pos;
             }
         }

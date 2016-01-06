@@ -18,5 +18,5 @@ GAME.Background.prototype.updateTransform = function() {
 	this.emit('backgroundUpdated', {
 		scrollPosition: this.scrollPosition
 	});
-	PIXI.Container.prototype.updateTransform.call( this );
+	PIXI.Container.prototype.updateTransform.call(this);
 }

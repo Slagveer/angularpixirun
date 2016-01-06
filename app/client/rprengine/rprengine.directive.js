@@ -63,10 +63,13 @@
                 if (event.target.type !== 'button'){
                     if(!GameValues.INTERACTIVE) {
                         return;
-                    }
+                    }console.info(GameValues.GAMEMODE);
                     if(GameValues.GAMEMODE === GameConstants.GAME_MODE.INTRO){
                         GameValues.INTERACTIVE = false;
                         GameValues.GAMEMODE =  GameConstants.GAME_MODE.TITLE;
+                    } else if(GameValues.GAMEMODE === GameConstants.GAME_MODE.TITLE) {
+                        GameValues.INTERACTIVE = false;
+                        GameValues.GAMEMODE = GameConstants.GAME_MODE.COUNT_DOWN;
                     }
 
                     vm.engine.tap(event);

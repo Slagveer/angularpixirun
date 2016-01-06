@@ -6,9 +6,9 @@
         .module('hud')
         .directive('hudBlackView', HudBlackView);
 
-    HudBlackView.$inject = ['$window', 'RprEngineService', 'GameConstants', 'AssetsLoadService'];
+    HudBlackView.$inject = ['$window', 'RprEngineService', 'AssetsLoadService', 'GameConstants', 'GameValues'];
 
-    function HudBlackView($window, RprEngineService, GameConstants, AssetsLoadService) {
+    function HudBlackView($window, RprEngineService, AssetsLoadService, GameConstants, GameValues) {
         var directive = {
             link: HudBlackViewLink,
             templateUrl: 'app/client/hud/hud.black.view.ng.html',
@@ -45,6 +45,19 @@
 
             $scope.$on('update', function updateEvent() {
                 //console.log(vm.container);
+            });
+
+            $scope.$on('tapped', function updateEvent() {
+                if(GameValues.GAMEMODE === GameConstants.GAME_MODE.TITLE) {
+                    if(vm.black) {
+                        new TWEEN.Tween(vm.black)
+                            .to({
+                                alpha: 0
+                            }, 200)
+                            .start();
+                    }
+                }
+
             });
 
             ResizeService.subscribe($rootScope, resized);
