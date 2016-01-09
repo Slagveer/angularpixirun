@@ -37,13 +37,20 @@
 
             GameValues.GAMEMODE = GameConstants.GAME_MODE.TITLE;
 
+            $scope.$watch(function() {console.log(1)
+                return GameValues.GAME_MODE;
+            }, function(newVal) {
+                vm.mode = newVal;
+            }, true);
+
             $scope.$on('stressTestFinished', function stressTestFinished(evt, data) {
-                GameValues.INTERACTIVE = false;
+                GameValues.INTERACTIVE = true;
+                $scope.$apply();
                 $document[0].body.scroll = "no";
                 init();
             });
 
-            $scope.$on('pausePressed', function stressTestFinished(evt, data) {
+            $scope.$on('pausePressed', function pausePressed(evt, data) {
                 if(GameValues.GAMEMODE === GameConstants.GAME_MODE.PAUSED){
                     GameValues.INTERACTIVE = true;
                     vm.gameMode = prevState;
@@ -53,12 +60,11 @@
 
             function init() {
                 GameValues.GAMEMODE = GameConstants.GAME_MODE.INTRO;
-                vm.game = RprEngineService;
+                vm.engine = RprEngineService;
 
-                if(!AssetsLoadService.loaded) {
-                    AssetsLoadService.load(GameConstants.GAME_ASSETS)
-                        .then(onSucces, onError);
-                }
+                AssetsLoadService
+                    .load(GameConstants.GAME_ASSETS)
+                    .then(onSucces, onError);
 
                 $scope.$on('countdownCompleted', function countdownCompleted() {
                     GameValues.INTERACTIVE = true;
@@ -79,7 +85,7 @@
 
             function onSucces(data) {
                 GameValues.GAMEMODE = GameConstants.GAME_MODE.INTRO;
-                GameValues.INTERACTIVE = false;
+                GameValues.INTERACTIVE = true;
             }
 
             function onError(error) {

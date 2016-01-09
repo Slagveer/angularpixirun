@@ -5,9 +5,9 @@
             .module('rprengine')
             .value({
                 'GameValues': {
-                    GAME_MODE: '',
+                    GAME_MODE: 0,
                     CAMERA: null,
-                    INTERACTIVE: false
+                    INTERACTIVE: true
                 }
             });
     }

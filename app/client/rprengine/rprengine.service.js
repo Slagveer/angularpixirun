@@ -71,6 +71,9 @@
                 tap: function () {
                     this.send('tapped', {});
                 },
+                countdown: function () {
+                    this.send('countdown', {});
+                },
                 joyrideComplete: function() {
                     this.joyrideMode = false;
                     this.pickupCount = 0;

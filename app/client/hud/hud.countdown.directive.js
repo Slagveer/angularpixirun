@@ -36,13 +36,16 @@
                 vm.countdown.position.x = 200;
                 vm.countdown.position.y = 200;
                 vm.container.addChild(vm.countdown);
-                //vm.countdown.startCountDown(function countdownCompleted(){
-                //    $scope.$emit('countdownCompleted');
-                //});
             });
 
             $scope.$on('update', function updateEvent() {
                 //console.log(vm.container);
+            });
+
+            $scope.$on('countdown', function startCountdownEvent() {
+                vm.countdown.startCountDown(function countdownCompleted(){
+                    $rootScope.$broadcast('countdownCompleted');
+                });
             });
 
             ResizeService.subscribe($rootScope, resized);

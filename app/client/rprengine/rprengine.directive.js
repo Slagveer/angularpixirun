@@ -59,25 +59,25 @@
             RprEngineValues.HIGH_MODE = (vm.renderer instanceof PIXI.WebGLRenderer);
 
             vm.container.mousedown = vm.container.touchstart = function(event) {
-                //event.preventDefault();
-                if (event.target.type !== 'button'){
+                event.stopPropagation();
+
+                if (event.target.type !== 'button'){console.log(GameValues.GAMEMODE, GameValues.INTERACTIVE);
                     if(!GameValues.INTERACTIVE) {
                         return;
-                    }console.info(GameValues.GAMEMODE);
+                    }
+                    vm.engine.tap(event);
                     if(GameValues.GAMEMODE === GameConstants.GAME_MODE.INTRO){
                         GameValues.INTERACTIVE = false;
-                        GameValues.GAMEMODE =  GameConstants.GAME_MODE.TITLE;
+                        GameValues.GAMEMODE = GameConstants.GAME_MODE.TITLE;
                     } else if(GameValues.GAMEMODE === GameConstants.GAME_MODE.TITLE) {
                         GameValues.INTERACTIVE = false;
                         GameValues.GAMEMODE = GameConstants.GAME_MODE.COUNT_DOWN;
                     }
-
-                    vm.engine.tap(event);
                 }
             }
 
             $scope.$on('countdownCompleted', function countdownCompleted() {
-                GameValues.INTERACTIVE = true;
+                //
             });
 
             $scope.$on('stressTestFinished', function stressTestFinished(evt, data) {
