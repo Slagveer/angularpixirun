@@ -48,10 +48,16 @@ GAME.Steve = function(runningFrames, flyingFrames, crashFrames) {
 	this.realAnimationSpeed = 0.23;
     
     this.volume = 0.3;
+
+	this.time = null;
+    this.camera = null;
 }
 GAME.Steve.constructor = GAME.Steve;
-GAME.Steve.prototype.update = function()
+GAME.Steve.prototype.update = function(time, camera)
 {
+	this.time = time;
+	this.camera = camera;
+
 	if(this.isDead)
 	{
 		this.updateDieing();
@@ -88,7 +94,7 @@ GAME.Steve.prototype.normalMode = function()
 
 GAME.Steve.prototype.updateRunning = function()
 {
-	this.view.animationSpeed = this.realAnimationSpeed * GAME.time.DELTA_TIME * this.level;
+	this.view.animationSpeed = this.realAnimationSpeed * this.time.DELTA_TIME * this.level;
 
 	if(this.isActive)
 	{
@@ -100,22 +106,22 @@ GAME.Steve.prototype.updateRunning = function()
 	if(this.isFlying)
 	{
 		this.accel = 0.6;
-		this.speed.y -= this.accel  * GAME.time.DELTA_TIME;
-		if(this.speed.y > 0) this.speed.y -= 0.3 * GAME.time.DELTA_TIME;
+		this.speed.y -= this.accel  * this.time.DELTA_TIME;
+		if(this.speed.y > 0) this.speed.y -= 0.3 * this.time.DELTA_TIME;
 	}
 	else
 	{
-		if(this.speed.y < 0) this.speed.y += 0.05 * GAME.time.DELTA_TIME;
+		if(this.speed.y < 0) this.speed.y += 0.05 * this.time.DELTA_TIME;
 	}
 	
-	this.speed.y += this.gravity  * GAME.time.DELTA_TIME;
+	this.speed.y += this.gravity  * this.time.DELTA_TIME;
 	
 	if(this.speed.y > 8) this.speed.y = 8;
 	if(this.speed.y < -9) this.speed.y = -9;
 
     var accel = this.speed.y - oldSpeed;
-	this.position.x += this.speed.x * GAME.time.DELTA_TIME * this.level;
-	this.position.y += this.speed.y * GAME.time.DELTA_TIME;
+	this.position.x += this.speed.x * this.time.DELTA_TIME * this.level;
+	this.position.y += this.speed.y * this.time.DELTA_TIME;
 	
 	if(this.onGround !== this.onGroundCache)
 	{
@@ -137,16 +143,16 @@ GAME.Steve.prototype.updateRunning = function()
 		}
 		else
 		{
-            FidoAudio.setVolume('runFast', 0);
-            FidoAudio.setVolume('runRegular', 0);   
+            //FidoAudio.setVolume('runFast', 0);
+            //FidoAudio.setVolume('runRegular', 0);
 			this.view.textures = this.flyingFrames;
 		}
 	}
 	
-	GAME.camera.x = this.position.x - 100;
+	this.camera.x = this.position.x - 100;
 	
-	this.view.position.x = this.position.x - GAME.camera.x;
-	this.view.position.y = this.position.y - GAME.camera.y;
+	this.view.position.x = this.position.x - this.camera.x;
+	this.view.position.y = this.position.y - this.camera.y;
 	
 	this.view.rotation += (this.speed.y * 0.05 - this.view.rotation) * 0.1;
 }
@@ -158,25 +164,25 @@ GAME.Steve.prototype.updateDieing = function()
 	if(this.onGround) this.speed.y *= 0.99;
     
 	this.speed.y += 0.1;
-	this.accel += (0 - this.accel) * 0.1 * GAME.time.DELTA_TIME;
+	this.accel += (0 - this.accel) * 0.1 * this.time.DELTA_TIME;
 	
-	this.speed.y += this.gravity  * GAME.time.DELTA_TIME;;
+	this.speed.y += this.gravity  * this.time.DELTA_TIME;
 	
-	this.position.x += this.speed.x  * GAME.time.DELTA_TIME;;
-	this.position.y += this.speed.y  * GAME.time.DELTA_TIME;;
+	this.position.x += this.speed.x  * this.time.DELTA_TIME;
+	this.position.y += this.speed.y  * this.time.DELTA_TIME;
 
-	GAME.camera.x = this.position.x - 100;
+	this.camera.x = this.position.x - 100;
 	
-	this.view.position.x = this.position.x - GAME.camera.x;
-	this.view.position.y = this.position.y - GAME.camera.y;
+	this.view.position.x = this.position.x - this.camera.x;
+	this.view.position.y = this.position.y - this.camera.y;
 	
 	if(this.speed.x < 5)
 	{
-		this.view.rotation += this.rotationSpeed * (this.speed.x / 5) * GAME.time.DELTA_TIME;
+		this.view.rotation += this.rotationSpeed * (this.speed.x / 5) * this.time.DELTA_TIME;
 	}
 	else
 	{
-		this.view.rotation += this.rotationSpeed * GAME.time.DELTA_TIME;
+		this.view.rotation += this.rotationSpeed * this.time.DELTA_TIME;
 	}
 }
 
@@ -210,13 +216,13 @@ GAME.Steve.prototype.die = function()
     FidoAudio.setVolume('runRegular', 0);
     FidoAudio.fadeOut('gameMusic');
 
-	TweenLite.to(GAME.time, 0.5, {
+	TweenLite.to(this.time, 0.5, {
         speed : 0.1, 
         ease : Cubic.easeOut, 
         onComplete : function()
         {
             FidoAudio.play('deathJingle');
-            TweenLite.to(GAME.time, 2, {
+            TweenLite.to(this.time, 2, {
                 speed : 1, 
                 delay : 1
             });

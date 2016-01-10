@@ -37,7 +37,7 @@
 
             GameValues.GAMEMODE = GameConstants.GAME_MODE.TITLE;
 
-            $scope.$watch(function() {console.log(1)
+            $scope.$watch(function() {
                 return GameValues.GAME_MODE;
             }, function(newVal) {
                 vm.mode = newVal;

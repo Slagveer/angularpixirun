@@ -61,10 +61,12 @@
                         vm.steve.level += 0.05;
                     }
                 }
+
+                //vm.steve.update(TimeService, GameValues.CAMERA);
             });
 
             $scope.$on('engineStarted', function engineStartedEvent() {
-                vm.steve.steve.level = 1;
+                vm.steve.level = 1;
                 vm.steve.position.y = 477;
                 vm.steve.speed.y = 0;
                 vm.steve.speed.x = vm.steve.baseSpeed;

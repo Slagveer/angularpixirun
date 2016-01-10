@@ -61,7 +61,7 @@
             vm.container.mousedown = vm.container.touchstart = function(event) {
                 event.stopPropagation();
 
-                if (event.target.type !== 'button'){console.log(GameValues.GAMEMODE, GameValues.INTERACTIVE);
+                if (event.target.type !== 'button'){
                     if(!GameValues.INTERACTIVE) {
                         return;
                     }
@@ -71,6 +71,7 @@
                         GameValues.GAMEMODE = GameConstants.GAME_MODE.TITLE;
                     } else if(GameValues.GAMEMODE === GameConstants.GAME_MODE.TITLE) {
                         GameValues.INTERACTIVE = false;
+                        RprEngineService.start();
                         GameValues.GAMEMODE = GameConstants.GAME_MODE.COUNT_DOWN;
                     }
                 }

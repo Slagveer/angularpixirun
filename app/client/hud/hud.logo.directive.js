@@ -51,7 +51,7 @@
                 //
             });
 
-            $scope.$on('tapped', function updateEvent() {console.log(GameValues.GAME_MODE)
+            $scope.$on('tapped', function updateEvent() {
                 if(GameValues.GAMEMODE === GameConstants.GAME_MODE.INTRO) {
                     vm.logo.alpha = 0;
                     vm.logo.scale.x = 1.5;
