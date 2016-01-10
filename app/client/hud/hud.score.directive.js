@@ -42,6 +42,17 @@
                 vm.score.setScore(Math.round(vm.engine.score));
             });
 
+            $scope.$on('countdownCompleted', function countdownCompleted() {
+                vm.score.alpha = 1;
+                vm.score.position.x = ResizeService.width + 300;
+                vm.score.position.y -= 14;
+                new TWEEN.Tween(vm.score.position).to({
+                        x: ResizeService.width - 295 - 20,
+                    }, 1000)
+                    .easing(TWEEN.Easing.Elastic.Out)
+                    .start();
+            });
+
             ResizeService.subscribe($rootScope, resized);
 
             function resized(event, data) {

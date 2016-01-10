@@ -41,6 +41,16 @@
                 vm.powerBar.bar.scale.x = ( (vm.engine.pickupCount/(50 *  vm.engine.bulletMult) )*(248/252) )
             });
 
+            $scope.$on('countdownCompleted', function countdownCompleted() {
+                vm.powerBar.alpha = 1;
+                vm.powerBar.position.x = ResizeService.width;
+                new TWEEN.Tween(vm.powerBar.position).to({
+                        x: ResizeService.width - 295,
+                    }, 300)
+                    .easing(TWEEN.Easing.Elastic.Out)
+                    .start();
+                });
+
             ResizeService.subscribe($rootScope, resized);
 
             function resized(event, data) {
