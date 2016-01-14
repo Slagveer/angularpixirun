@@ -62,7 +62,7 @@
                     }
                 }
 
-                //vm.steve.update(TimeService, GameValues.CAMERA);
+                vm.steve.update(TimeService, GameValues.CAMERA, vm.engine);
             });
 
             $scope.$on('engineStarted', function engineStartedEvent() {

@@ -50,7 +50,7 @@
             vm.container.addChild(vm.background);
 
             $scope.$on('update', function updateEvent() {
-
+                vm.background.updateTransform();
             });
 
             ResizeService.subscribe($rootScope, resized);

@@ -77,6 +77,12 @@
                 }
             }
 
+            vm.container.mouseup = vm.container.touchend = function(event) {
+                event.stopPropagation();
+
+
+            }
+
             $scope.$on('countdownCompleted', function countdownCompleted() {
                 //
             });
@@ -96,7 +102,7 @@
                     var inter = position + (position2 - position) * ratio;
 
                     vm.container.position.x = inter * vm.zoom ;
-                    vm.container.position.y = -SteveValues.STEVE.view.position.y * vm.zoom ;
+                    vm.container.position.y = -SteveValues.STEVE.view.position.y * vm.zoom;
 
                     vm.container.position.x += ResizeService.width/2;
                     vm.container.position.y += ResizeService.height/2;
@@ -113,10 +119,35 @@
                         vm.container.position.y = yMax;
                     }
 
-                    vm.container.scale.x = vm.zoom ;
-                    vm.container.scale.y = vm.zoom ;
+                    vm.container.scale.x = vm.zoom;
+                    vm.container.scale.y = vm.zoom;
                 }
                 vm.renderer.render(vm.stage);
+                RprEngineValues.GAMEFRONT = vm.gameFront;
+            });
+
+            $scope.$on('addPickup', function addPickupEvent(event, pickup) {
+                vm.game.addChild(pickup.view);
+            });
+
+            $scope.$on('removePickup', function removePickupEvent(event, pickup) {
+                vm.game.removeChild(pickup.view);
+            });
+
+            $scope.$on('addFloor', function addFloorEvent(event, floor) {
+                vm.gameFront.addChild(floor);
+            });
+
+            $scope.$on('removeFloor', function removeFloorEvent(floor) {
+                vm.gameFront.removeChild(floor);
+            });
+
+            $scope.$on('addEnemy', function addEnemyEvent(enemy) {
+                vm.gameFront.addChild(enemy.view);
+            });
+
+            $scope.$on('removeEnemy', function removeEnemyEvent(enemy) {
+                vm.gameFront.removeChild(enemy.view);
             });
 
             ResizeService.subscribe($rootScope, resized);

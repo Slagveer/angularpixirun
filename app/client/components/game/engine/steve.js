@@ -23,37 +23,29 @@ GAME.Steve = function(runningFrames, flyingFrames, crashFrames) {
 	
 	this.view = new PIXI.MovieClip(this.flyingFrames);
 	this.view.animationSpeed = 0.23;
-	
 	this.view.anchor.x = 0.5;
 	this.view.anchor.y = 0.5;
-	
 	this.position.y = 477;
 	this.ground = 477;
 	this.gravity = 0.3;
-	
 	this.baseSpeed = 8;
 	this.speed = new PIXI.Point(this.baseSpeed, 0);
-	
 	this.activeCount = 0;
 	this.isFlying = false;
 	this.accel =0;
-	
 	this.width = 26
 	this.height = 37;
-	
 	this.onGround = false;
 	this.rotationSpeed = 0;
 	this.joyRiding = false;
 	this.level = 1;
 	this.realAnimationSpeed = 0.23;
-    
     this.volume = 0.3;
-
 	this.time = null;
     this.camera = null;
 }
 GAME.Steve.constructor = GAME.Steve;
-GAME.Steve.prototype.update = function(time, camera)
+GAME.Steve.prototype.update = function(time, camera, engine)
 {
 	this.time = time;
 	this.camera = camera;
@@ -64,7 +56,7 @@ GAME.Steve.prototype.update = function(time, camera)
 	}
 	else
 	{
-		this.updateRunning();
+		this.updateRunning(this.time);
 	}
 }
 
@@ -95,7 +87,6 @@ GAME.Steve.prototype.normalMode = function()
 GAME.Steve.prototype.updateRunning = function()
 {
 	this.view.animationSpeed = this.realAnimationSpeed * this.time.DELTA_TIME * this.level;
-
 	if(this.isActive)
 	{
 		this.isFlying = true;
@@ -132,13 +123,13 @@ GAME.Steve.prototype.updateRunning = function()
 			this.view.textures = this.runningFrames;
             if(this.joyRiding === true) 
             {
-                FidoAudio.setVolume('runFast', this.volume);
-                FidoAudio.setVolume('runRegular', 0);
+                //FidoAudio.setVolume('runFast', this.volume);
+                //FidoAudio.setVolume('runRegular', 0);
             }
             else
             {
-                FidoAudio.setVolume('runRegular', this.volume);  
-                FidoAudio.setVolume('runFast', 0);
+                //FidoAudio.setVolume('runRegular', this.volume);
+                //FidoAudio.setVolume('runFast', 0);
             }
 		}
 		else

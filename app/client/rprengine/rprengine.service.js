@@ -5,7 +5,10 @@
     'use strict';
     angular
         .module('rprengine')
-        .factory('RprEngineService', ['$q', '$rootScope', 'TimeService', 'GameValues', 'GameConstants', function($q, $rootScope, TimeService, GameValues, GameConstants) {
+        .factory('RprEngineService', ['$q', '$rootScope', 'TimeService', 'GameValues', 'GameConstants', 'PickupManagerService',
+            'SteveValues', 'SegmentManagerService', 'FloorManagerService', 'CollisionManagerService', 'EnemyManagerService',
+            function($q, $rootScope, TimeService, GameValues, GameConstants,
+                                    PickupManagerService, SteveValues, SegmentManagerService, FloorManagerService, CollisionManagerService, EnemyManagerService) {
             GameValues.CAMERA = new PIXI.Point();
             var factory = {
                 bulletMult: 1,
@@ -20,7 +23,7 @@
                 send: function (msg, data) {
                     $rootScope.$broadcast(msg, data);
                 },
-                update: function () {
+                update: function() {
                     var targetCamY = 0;
 
                     this.send('update', {});
@@ -33,7 +36,14 @@
                     }
                     GameValues.CAMERA.y = targetCamY;
 
-                    if (GameValues.GAMEMODE === GameConstants.GAME_MODE.PAUSE) {
+                    if (GameValues.GAMEMODE !== GameConstants.GAME_MODE.PAUSED) {
+                        SteveValues.STEVE.update(TimeService,GameValues.CAMERA, this);
+                        CollisionManagerService.update(this);
+                        SegmentManagerService.update();
+                        FloorManagerService.update();
+                        EnemyManagerService.update();
+                        PickupManagerService.update();
+
                         if (this.joyrideMode) {
                             this.joyrideCountdown -= TimeService.DELTA_TIME;
 
@@ -46,7 +56,7 @@
 
                         if (this.levelCount > (60 * 60)) {
                             this.levelCount = 0;
-                            this.steve.level += 0.05;
+                            SteveValues.STEVE.level += 0.05;
                             TimeService.speed += 0.05;
                         }
                     } else {
@@ -56,11 +66,15 @@
                     }
                 },
                 start: function () {
+                    SegmentManagerService.reset();
+                    EnemyManagerService.destroyAll();
+                    PickupManagerService.destroyAll();
                     this.send('engineStarted', {});
                     this.isPlaying = true;
                     this.gameReallyOver = false;
                     this.score = 0;
                     this.bulletMult = 1;
+                    SegmentManagerService.chillMode = false;
                 },
                 reset: function () {
                     this.send('engineResetted', {});
