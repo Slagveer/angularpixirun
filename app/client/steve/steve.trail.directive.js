@@ -38,7 +38,9 @@
             });
 
             $scope.$on('update', function updateEvent() {
-                vm.trail.target = SteveValues.STEVE;
+                if(typeof vm.target !== 'undefined') {
+                    vm.trail.target = SteveValues.STEVE;
+                }
             });
 
             ResizeService.subscribe($rootScope, resized);

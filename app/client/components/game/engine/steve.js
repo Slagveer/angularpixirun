@@ -233,11 +233,11 @@ GAME.Steve.prototype.boil = function()
 {
 	if(this.isDead) return;
     
-    FidoAudio.setVolume('runFast', 0);
-    FidoAudio.setVolume('runRegular', 0);
-    FidoAudio.fadeOut('gameMusic');
-    FidoAudio.play('lavaSplosh');
-    FidoAudio.play('deathJingle');
+    //FidoAudio.setVolume('runFast', 0);
+    //FidoAudio.setVolume('runRegular', 0);
+    //FidoAudio.fadeOut('gameMusic');
+    //FidoAudio.play('lavaSplosh');
+    //FidoAudio.play('deathJingle');
     
 	this.isDead = true;
 }

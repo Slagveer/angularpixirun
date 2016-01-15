@@ -6,9 +6,10 @@
     angular
         .module('rprengine')
         .factory('SegmentManagerService', ['$q', '$rootScope', 'TimeService', 'GameValues',
-            'GameConstants', 'SegmentManagerConstants', 'RprEngineValues', 'FloorManagerService', 'EnemyManagerService',
+            'GameConstants', 'SegmentManagerConstants', 'RprEngineValues', 'FloorManagerService',
+            'EnemyManagerService', 'PickupManagerService',
             function($q, $rootScope, TimeService, GameValues, GameConstants, SegmentManagerConstants,
-                RprEngineValues, FloorManagerService, EnemyManagerService) {
+                RprEngineValues, FloorManagerService, EnemyManagerService, PickupManagerService) {
             var factory = {
                 sections: SegmentManagerConstants.DATA,
                 count: 0,

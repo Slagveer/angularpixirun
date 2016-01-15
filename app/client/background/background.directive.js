@@ -42,9 +42,9 @@
             }
             vm.background = vm.normalBackground;
             vm.background.on('backgroundUpdated', function backgroundUpdated(data) {
-                $scope.$broadcast('updateTransform', {
-                    scrollPosition: data.scrollPosition
-                });
+                    $scope.$broadcast('updateTransform', {
+                        scrollPosition: data.scrollPosition
+                    });
             });
             vm.vines = BackgroundConstants.VINES;
             vm.container.addChild(vm.background);

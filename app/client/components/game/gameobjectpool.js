@@ -17,7 +17,7 @@ GAME.GameObjectPool.constructor = GAME.GameObjectPool;
 
 GAME.GameObjectPool.prototype.getObject = function()
 {
-	var object = this.pool.pop();
+	var object = this.pool.pop(); console.log(this.classType)
 	if(!object)
 	{
 		object =  new this.classType();

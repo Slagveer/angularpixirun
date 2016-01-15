@@ -41,8 +41,8 @@
                         CollisionManagerService.update(this);
                         SegmentManagerService.update();
                         FloorManagerService.update();
-                        EnemyManagerService.update();
-                        PickupManagerService.update();
+                        //EnemyManagerService.update();
+                        //PickupManagerService.update();
 
                         if (this.joyrideMode) {
                             this.joyrideCountdown -= TimeService.DELTA_TIME;
@@ -92,6 +92,20 @@
                     this.joyrideMode = false;
                     this.pickupCount = 0;
                     this.bulletMult += 0.3;
+                },
+                gameover: function() {
+                    this.isPlaying = false;
+                    this.isDying = true;
+                    SegmentManagerService.chillMode = true;
+
+                    //var nHighscore = this.LocalStorage.get('highscore');
+                    //if(!nHighscore || this.score > nHighscore) {
+                        //this.LocalStorage.store('highscore', this.score);
+                        GameValues.NEWHIGHSCORE = true;
+                    //}
+
+                    //this.onGameover();
+                    this.send('gameover');
                 }
             }
             return factory;

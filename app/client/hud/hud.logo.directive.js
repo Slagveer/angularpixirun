@@ -51,6 +51,16 @@
                 //
             });
 
+            $scope.$on('gameover', function updateEvent() {
+                vm.logo.visible = true;
+                new TWEEN.Tween(vm.logo).to({
+                        alpha: 1
+                    }, 300)
+                    .onComplete(function onCompleted() {
+                        GameValues.INTERACTIVE = true;
+                    }).start();
+            });
+
             $scope.$on('tapped', function updateEvent() {
                 if(GameValues.GAMEMODE === GameConstants.GAME_MODE.INTRO) {
                     vm.logo.alpha = 0;

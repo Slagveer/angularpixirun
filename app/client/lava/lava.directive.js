@@ -69,7 +69,7 @@
                     pos %=  h * vm.sprites.length ;
                     pos +=  h * 2;
 
-                    vm.sprites[i].setTexture(this.textures[frame]);
+                    vm.sprites[i].textture = (this.textures[frame]);
                     vm.sprites[i].position.x = Math.floor(pos) + 800 - RprEngineValues.XOFFSET;
                 };
             }

@@ -76,7 +76,7 @@
                         } else {
                             steve.speed.x *= 0.95;
                             if(!GameValues.INTERACTIVE) {
-                                showGameover();
+                                this.send('gameover');
                                 GameValues.INTERACTIVE = true;
                             }
                             if(steve.bounce === 0) {

@@ -81,6 +81,22 @@ GAME.BestScore.prototype.setScore = function(score)
 	{
 		this.digits[i].visible = false;
 	}
+
+	function formatScore(n)
+	{
+		var nArray = n.toString().split("");
+		var text = "";
+		var total = nArray.length;
+
+		var offset = (total % 3)-1;
+		for(var i = 0; i < total; i++)
+		{
+			text += nArray[i];
+			if((i - offset) % 3 == 0 && i != total-1)text+=",";
+		}
+
+		return text;
+	}
 }
 
 GAME.BestScore.prototype.jump = function()
@@ -90,5 +106,6 @@ GAME.BestScore.prototype.jump = function()
 
 GAME.BestScore.prototype.update = function()
 {
-    this.setScore(Math.round(parseInt(this.LocalStorage.get('highscore'))) || 0);
+	//var value = Math.round(parseInt(this.LocalStorage.get('highscore'))) || 0;
+    this.setScore(0);
 }

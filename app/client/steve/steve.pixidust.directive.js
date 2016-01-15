@@ -34,12 +34,12 @@
             var vm = this;
 
             AssetsLoadService.load(GameConstants.GAME_ASSETS).then(function(){
-                vm.pixiDust = new GAME.PixiDust();
+                vm.pixiDust = new GAME.PixiDust(GameValues.CAMERA);
                 vm.container.addChild(vm.pixiDust);
             });
 
             $scope.$on('update', function updateEvent() {
-
+                vm.pixiDust.update();
             });
 
             ResizeService.subscribe($rootScope, resized);

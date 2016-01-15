@@ -8,7 +8,7 @@ GAME.SteveTrailFire = function(stage)
 	this.target = new PIXI.Point();
 	
 	this.particals = [];
-	this.particalPool = new GAME.GameObjectPool(ParticalFire);
+	this.particalPool = new GAME.GameObjectPool(ParticalFire); console.log(ParticalFire)
 	this.max = 100
 	this.count = 0;
 	

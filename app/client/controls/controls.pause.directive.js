@@ -57,6 +57,10 @@
                 //console.log(vm.container);
             });
 
+            $scope.$on('gameover', function updateEvent() {
+                vm.pauseButton.interactive = false;
+            });
+
             $scope.$on('countdownCompleted', function countdownCompleted() {
                 vm.pauseButton.visible = true;
                 new TWEEN.Tween(vm.pauseButton).to({

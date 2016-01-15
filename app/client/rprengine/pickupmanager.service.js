@@ -25,7 +25,7 @@
                         {
                             this.pos += 0.15;
                             this.spawnCount = 0;
-                            this.addPickup(GameValues.CAMERA.x + GameValues.CAMERA.width, 280 + Math.sin(this.pos) * 180)
+                            //this.addPickup(GameValues.CAMERA.x + GameValues.CAMERA.width, 280 + Math.sin(this.pos) * 180)
                         }
                     }
                     for(var i=0;i<this.pickups.length;i++) {
@@ -60,7 +60,7 @@
                     pickup.position.y = y;
                     this.pickups.push(pickup);
                     //this.engine.view.game.addChild(pickup.view);
-                    this.send('addPickup', pick.view);
+                    //this.send('addPickup', pick.view);
                 },
                 removePickup: function(index) {
                     var pickup = this.pickups[index];

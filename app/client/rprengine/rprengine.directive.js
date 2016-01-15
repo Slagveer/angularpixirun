@@ -96,7 +96,7 @@
                 vm.count += 0.01;
 
                 if(!GameValues.LOW_MODE) {
-                    var ratio = (vm.zoom-1);
+                    var ratio = vm.zoom - 1;
                     var position = -ResizeService.width/2;
                     var position2 = -SteveValues.STEVE.view.position.x;
                     var inter = position + (position2 - position) * ratio;
@@ -112,7 +112,7 @@
                     if(vm.container.position.y > 0) {
                         vm.container.position.y = 0;
                     }
-                    var yMax = -ResizeService.height * this.zoom ;
+                    var yMax = -ResizeService.height * vm.zoom;
                     yMax += ResizeService.height;
 
                     if(vm.container.position.y < yMax) {
@@ -143,7 +143,7 @@
             });
 
             $scope.$on('addEnemy', function addEnemyEvent(enemy) {
-                vm.gameFront.addChild(enemy.view);
+                //vm.gameFront.addChild(enemy.view);
             });
 
             $scope.$on('removeEnemy', function removeEnemyEvent(enemy) {

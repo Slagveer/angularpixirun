@@ -7,7 +7,7 @@ GAME.SteveTrail = function(stage)
 	this.stage = stage;
 	this.target = new PIXI.Point();
 	this.particals = [];
-	this.particalPool = new GAME.GameObjectPool(Partical);
+	this.particalPool = new GAME.GameObjectPool(Partical); console.log(Partical)
 	this.max = 100
 	this.count = 0;
 }
@@ -71,12 +71,11 @@ GAME.SteveTrail.prototype.update = function()
 	}	
 }
 
-Partical = function()
-{
-	PIXI.Sprite.call(this, PIXI.Texture.fromFrameId("starPops0004.png"));
-	this.anchor.x = 0.5;
-	this.anchor.y = 0.5;
-	this.speed = new PIXI.Point();
+function Partical () {
+    PIXI.Sprite.call(this, PIXI.Texture.fromFrame("starPops0004.png"));
+    this.anchor.x = 0.5;
+    this.anchor.y = 0.5;
+    this.speed = new PIXI.Point();
 }
 
 Partical.constructor = Partical;

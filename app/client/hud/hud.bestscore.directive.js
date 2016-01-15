@@ -38,7 +38,7 @@
             });
 
             $scope.$on('update', function updateEvent() {
-                //console.log(vm.container);
+                vm.bestScore.update();
             });
 
             $scope.$on('countdownCompleted', function countdownCompleted() {

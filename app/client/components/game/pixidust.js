@@ -2,10 +2,11 @@ if (typeof(GAME) === 'undefined') {
 	this.GAME = {};
 }
 
-GAME.PixiDust = function()
+GAME.PixiDust = function(camera)
 {
 	PIXI.Container.call(this);
-	
+
+	this.camera = camera;
 	this.particals = [];
 	this.particalPool = new GAME.GameObjectPool(ParticalDust);
 	this.max = GAME.HIGH_MODE ? 100 : 10;
@@ -38,7 +39,7 @@ GAME.PixiDust.prototype.update = function()
 		partical.scale.x = partical.scale.y = scaleRatio// * 0.5;
 		partical.home.x += partical.speed.x;
 		partical.position.y += partical.speed.y;
-		partical.position.x = (partical.home.x - GAME.camera.x) *scaleRatio  * 1.5;
+		partical.position.x = (partical.home.x - this.camera.x) *scaleRatio  * 1.5;
 		
 		partical.position.x %= GAME.width;
 		if(partical.position.x < 0){
