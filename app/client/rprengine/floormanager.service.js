@@ -20,8 +20,8 @@
                         var floor = this.floors[i];
 
                         floor.position.x = floor.x - GameValues.CAMERA.x -16;
-                        if(floor.position.x < -1135 - GameValues.XOFFSET -16) {
-                            this.floorPool.returnObject(floor)
+                        if(floor.position.x < (-1135 - RprEngineValues.XOFFSET -16)) {
+                            this.floorPool.returnObject(floor);
                             this.floors.splice(i, 1);
                             i--;
                             //RprEngineValues.GAMEFRONT.removeChild(floor);

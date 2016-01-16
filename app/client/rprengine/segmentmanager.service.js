@@ -41,7 +41,7 @@
                             nextSegment = this.startSegment;
                             nextSegment.start = this.currentSegment.start + this.currentSegment.length;
                             this.currentSegment = nextSegment;
-                            for ( var i = 0; i < this.currentSegment.floor.length; i++) {
+                            for(var i=0;i<this.currentSegment.floor.length;i++) {
                                 FloorManagerService.addFloor(this.currentSegment.start + this.currentSegment.floor[i]);
                             }
 

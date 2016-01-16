@@ -50,6 +50,18 @@
                 init();
             });
 
+            $scope.$on('tapped', function onTapped(evt, data) {
+                if(GameValues.GAMEMODE === GameConstants.GAME_MODE.INTRO){
+
+                }else if(GameValues.GAMEMODE === GameConstants.GAME_MODE.TITLE) {
+
+                }else if(GameValues.GAMEMODE === GameConstants.GAME_MODE.GAME_OVER) {
+                    GameValues.INTERACTIVE = false;
+                } else {
+
+                }
+            });
+
             $scope.$on('pausePressed', function pausePressed(evt, data) {
                 if(GameValues.GAMEMODE === GameConstants.GAME_MODE.PAUSED){
                     GameValues.INTERACTIVE = true;

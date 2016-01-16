@@ -17,11 +17,11 @@ GAME.GameObjectPool.constructor = GAME.GameObjectPool;
 
 GAME.GameObjectPool.prototype.getObject = function()
 {
-	var object = this.pool.pop(); console.log(this.classType)
+	var object = this.pool.pop();
 	if(!object)
 	{
 		object =  new this.classType();
-		
+
 	}
 	return object;
 }

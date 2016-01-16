@@ -29,7 +29,7 @@
 
         function HudLogoViewController($rootScope, $scope, RprEngineService, ResizeService, GameConstants) {
             var vm = this;
-            
+
             vm.engine = RprEngineService;
             AssetsLoadService.load(GameConstants.GAME_ASSETS).then(function(){
                 vm.logo = new PIXI.Sprite.fromImage("runLogo.png");
@@ -61,8 +61,8 @@
                     }).start();
             });
 
-            $scope.$on('tapped', function updateEvent() {
-                if(GameValues.GAMEMODE === GameConstants.GAME_MODE.INTRO) {
+            $scope.$on('tapped', function onTapped() {
+                if(GameValues.GAMEMODE === GameConstants.GAME_MODE.INTRO){
                     vm.logo.alpha = 0;
                     vm.logo.scale.x = 1.5;
                     vm.logo.scale.y = 1.5;
@@ -80,7 +80,7 @@
                         .onComplete(function onCompleted() {
                             GameValues.INTERACTIVE = true;
                         }).start();
-                } else if(GameValues.GAMEMODE === GameConstants.GAME_MODE.TITLE) {
+                }else if(GameValues.GAMEMODE === GameConstants.GAME_MODE.TITLE) {
                     new TWEEN.Tween(vm.logo).to({
                             alpha: 0
                         }, 300)
@@ -89,9 +89,11 @@
                             vm.logo.texture = (PIXI.Texture.fromFrame("gameOver.png"));
                             RprEngineService.countdown();
                         }).start();
+                }else if(GameValues.GAMEMODE === GameConstants.GAME_MODE.GAME_OVER) {
+
+                } else {
 
                 }
-
             });
 
             ResizeService.subscribe($rootScope, resized);

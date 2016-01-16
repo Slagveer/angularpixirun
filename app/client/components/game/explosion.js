@@ -4,34 +4,34 @@ if (typeof(GAME) === 'undefined') {
 
 GAME.Explosion = function()
 {
-	PIXI.DisplayObjectContainer.call( this );
-	
+	PIXI.Container.call( this );
+
 	this.particals = [];
 
 	this.top = 	new ExplosionPartical("asplodeInner02.png");
 	this.bottom = new ExplosionPartical("asplodeInner01.png");
-	
+
 	this.top.position.y = -20;
 	this.bottom.position.y = 20;
-	
+
 	this.top.position.x = 20;
 	this.bottom.position.x = 20;
-	
+
 	this.anchor = new PIXI.Point();
 	this.addChild(this.top);
 	this.addChild(this.bottom);
-	
+
 	this.particals = [this.top , this.bottom];
-	
-	for (var i=0; i < 5; i++) 
+
+	for (var i=0; i < 5; i++)
 	{
 		this.particals.push(new ExplosionPartical("asplodeSpike_01.png"));
 		this.particals.push(new ExplosionPartical("asplodeSpike_02.png"));
 	}
 
 	this.clouds = [];
-	
-	for (var i=0; i < 5; i++) 
+
+	for (var i=0; i < 5; i++)
 	{
 	 	var cloud = new PIXI.Sprite.fromFrame("dustSwirl.png");
 	 	this.clouds.push(cloud);
@@ -52,7 +52,7 @@ GAME.Explosion.prototype.explode = function()
 
 GAME.Explosion.prototype.reset = function()
 {
-	for (var i=0; i < 5; i++) 
+	for (var i=0; i < 5; i++)
 	{
 		var cloud =this.clouds[i];
 		cloud.anchor.x = 0.5;
@@ -66,25 +66,25 @@ GAME.Explosion.prototype.reset = function()
 	 	cloud.state = 0;
 	 	cloud.rotSpeed = Math.random() * 0.05;
 	}
-	 	 	
-	for (var i=0; i < this.particals.length; i++) 
+
+	for (var i=0; i < this.particals.length; i++)
 	{
 		var partical =  this.particals[i];
 		this.addChild(partical);
 		var angle = (i/this.particals.length) * Math.PI * 2;
 		var speed = 7 + Math.random()
-		partical.directionX = Math.cos(angle) * speed;	
+		partical.directionX = Math.cos(angle) * speed;
 		partical.directionY = Math.sin(angle) * speed;
-		partical.rotation = -angle;	
-		partical.rotationSpeed = Math.random() * 0.02	
-	}	
+		partical.rotation = -angle;
+		partical.rotationSpeed = Math.random() * 0.02
+	}
 }
 
 GAME.Explosion.prototype.updateTransform = function()
 {
 	if(this.exploding)
 	{
-		for (var i=0; i < this.clouds.length; i++) 
+		for (var i=0; i < this.clouds.length; i++)
 		{
 			var cloud = this.clouds[i];
 			cloud.rotation += cloud.rotSpeed;
@@ -92,7 +92,7 @@ GAME.Explosion.prototype.updateTransform = function()
 			{
 				cloud.scale.x += (cloud.scaleTarget - cloud.scale.x) * 0.4;
 				cloud.scale.y = cloud.scale.x;
-				
+
 				if(cloud.scale.x > cloud.scaleTarget-0.1) cloud.state = 1;
 			}
 			else
@@ -101,11 +101,11 @@ GAME.Explosion.prototype.updateTransform = function()
 				cloud.position.y += cloud.speed.y * 0.05;
 			}
 		}
-		
-		for (var i=0; i < this.particals.length; i++) 
+
+		for (var i=0; i < this.particals.length; i++)
 		{
 			var partical =  this.particals[i];
-			
+
 			partical.directionY += 0.1;
 			partical.directionX *= 0.99;
 			partical.position.x += partical.directionX;
@@ -113,7 +113,7 @@ GAME.Explosion.prototype.updateTransform = function()
 			partical.rotation += partical.rotationSpeed;
 		}
 	}
-	
+
 	PIXI.DisplayObjectContainer.prototype.updateTransform.call( this );
 }
 
@@ -122,7 +122,7 @@ ExplosionPartical = function(id)
 	PIXI.Sprite.call(this, PIXI.Texture.fromFrame(id));
 	this.anchor.x = 0.5;
 	this.anchor.y = 0.5;
-	
+
 	this.speed = new PIXI.Point();
 }
 

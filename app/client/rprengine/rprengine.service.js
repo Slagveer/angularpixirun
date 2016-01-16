@@ -41,8 +41,8 @@
                         CollisionManagerService.update(this);
                         SegmentManagerService.update();
                         FloorManagerService.update();
-                        //EnemyManagerService.update();
-                        //PickupManagerService.update();
+                        EnemyManagerService.update();
+                        PickupManagerService.update();
 
                         if (this.joyrideMode) {
                             this.joyrideCountdown -= TimeService.DELTA_TIME;

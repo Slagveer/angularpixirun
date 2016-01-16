@@ -6,6 +6,7 @@ var enemyFrames;
 
 GAME.Enemy = function()
 {
+	this.camera = null;
 	this.position = new PIXI.Point();
 	this.view = new PIXI.Sprite(PIXI.Texture.fromFrameId("spike_box.png"));
 	this.view.anchor.x = 0.5;
@@ -48,7 +49,7 @@ GAME.Enemy.prototype.hit = function()
 
 GAME.Enemy.prototype.update = function()
 {
-	this.view.position.x = this.position.x - GAME.camera.x;
+	this.view.position.x = this.position.x - this.camera.x;
 	this.view.position.y = this.position.y;
 }
 

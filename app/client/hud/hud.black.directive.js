@@ -29,7 +29,7 @@
 
         function HudBlackViewController($rootScope, $scope, RprEngineService, ResizeService) {
             var vm = this;
-            
+
             vm.engine = RprEngineService;
             AssetsLoadService.load(GameConstants.GAME_ASSETS).then(function(){
                 vm.black = new PIXI.Sprite.fromImage("blackSquare.jpg");
@@ -47,8 +47,10 @@
                 //console.log(vm.container);
             });
 
-            $scope.$on('tapped', function updateEvent() {
-                if(GameValues.GAMEMODE === GameConstants.GAME_MODE.TITLE) {
+            $scope.$on('tapped', function onTapped() {
+                if(GameValues.GAMEMODE === GameConstants.GAME_MODE.INTRO){
+
+                }else if(GameValues.GAMEMODE === GameConstants.GAME_MODE.TITLE) {
                     if(vm.black) {
                         new TWEEN.Tween(vm.black)
                             .to({
@@ -56,8 +58,25 @@
                             }, 200)
                             .start();
                     }
-                }
+                }else if(GameValues.GAMEMODE === GameConstants.GAME_MODE.GAME_OVER) {
+                    vm.container.addChild(vm.black);
 
+                    new TWEEN.Tween(vm.black)
+                        .to({
+                            alpha: 1
+                        }, 300)
+                        .onComplete(function onCompleted() {
+                            new TWEEN.Tween(vm.black).to({
+                                    alpha: 0
+                                }, 300)
+                                .onComplete(function() {
+                                    this.send('countdown');
+                                }).start();
+                        })
+                        .start();
+                } else {
+
+                }
             });
 
             ResizeService.subscribe($rootScope, resized);

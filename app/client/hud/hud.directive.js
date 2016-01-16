@@ -17,7 +17,9 @@
             controllerAs: 'hudViewController',
             bindToController: true,
             scope: {
-                container: '='
+                container: '=',
+                gameController: '=',
+                rprengineController: '='
             }
         }
 
@@ -30,7 +32,7 @@
         function HudViewController($scope, RprEngineService) {
             var vm = this;
 
-            vm.engine = RprEngineService;
+            vm.engine = RprEngineService;console.log(vm.rprengineController)
 
             $scope.$on('update', function updateEvent() {
                 //

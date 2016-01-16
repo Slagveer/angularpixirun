@@ -6,9 +6,9 @@
     angular
         .module('rprengine')
         .factory('PickupManagerService', ['$q', '$rootScope', 'TimeService', 'GameValues',
-            'GameConstants', 'PickupManagerConstants', 'SteveValues', 'RprEngineValues',
+            'GameConstants', 'PickupManagerConstants', 'SteveValues', 'RprEngineValues', 'ResizeService',
             function($q, $rootScope, TimeService, GameValues, GameConstants, PickupManagerConstants,
-                     SteveValues, RprEngineValues) {
+                     SteveValues, RprEngineValues, ResizeService) {
             var factory = {
                 pickups: [],
                 pickupPool: new GAME.GameObjectPool(GAME.Pickup),
@@ -56,6 +56,9 @@
                 addPickup: function(x, y) {
                     var pickup = this.pickupPool.getObject();
 
+                    pickup.time = TimeService;
+                    pickup.camera = GameValues.CAMERA;
+                    pickup.resizer = ResizeService;
                     pickup.position.x = x;
                     pickup.position.y = y;
                     this.pickups.push(pickup);
@@ -86,7 +89,7 @@
                     for (var i=0;i<this.pickups.length;i++) {
                         var pickup = this.pickups[i];
 
-                        if(pickup.x > GAME.camera.x + GAME.width) {
+                        if(pickup.x > this.camera.x + this.resizer.width) {
                             this.pickupPool.returnObject(pickup);
                             //this.engine.view.game.removeChild(pickup.view);
                             this.pickups.splice(i, 1);

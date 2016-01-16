@@ -120,7 +120,6 @@
                                 if(!steve.isFlying) {
                                     steve.position.y = 478;
                                     steve.onGround = true;
-
                                 }
                             }
                         }

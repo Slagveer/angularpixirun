@@ -31,6 +31,7 @@
                 addEnemy: function(x, y) {
                     var enemy = this.enemyPool.getObject();
 
+                    enemy.camera = GameValues.CAMERA;
                     enemy.position.x = x;
                     enemy.position.y = y;
                     this.enemies.push(enemy);

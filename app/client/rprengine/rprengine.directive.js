@@ -17,7 +17,7 @@
             controllerAs: 'rprEngineViewController',
             bindToController: true,
             scope: {
-                //
+                gameController: '='
             }
         }
 
@@ -28,7 +28,7 @@
         RprEngineViewController.$inject = ['$rootScope', '$scope', '$window', 'RprEngineService', 'ResizeService', 'GameConstants', 'GameValues', 'SteveValues'];
 
         function RprEngineViewController($rootScope, $scope, $window, RprEngineService, ResizeService, GameConstants, GameValues, SteveValues) {
-            var vm = this;
+            var vm = this; console.log(vm.gameController);
 
             vm.joyrideComplete = joyrideComplete;
             vm.engine = RprEngineService;
@@ -81,7 +81,19 @@
                 event.stopPropagation();
 
 
-            }
+            };
+
+            $scope.$on('tapped', function onTapped() {
+                if(GameValues.GAMEMODE === GameConstants.GAME_MODE.INTRO){
+
+                }else if(GameValues.GAMEMODE === GameConstants.GAME_MODE.TITLE) {
+
+                }else if(GameValues.GAMEMODE === GameConstants.GAME_MODE.GAME_OVER) {
+
+                } else {
+
+                }
+            });
 
             $scope.$on('countdownCompleted', function countdownCompleted() {
                 //

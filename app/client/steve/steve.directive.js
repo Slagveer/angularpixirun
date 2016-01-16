@@ -61,8 +61,27 @@
                         vm.steve.level += 0.05;
                     }
                 }
-
                 vm.steve.update(TimeService, GameValues.CAMERA, vm.engine);
+            });
+
+            $scope.$on('tapped', function onTapped() {
+                if(GameValues.GAMEMODE === GameConstants.GAME_MODE.INTRO){
+
+                }else if(GameValues.GAMEMODE === GameConstants.GAME_MODE.TITLE) {
+
+                }else if(GameValues.GAMEMODE === GameConstants.GAME_MODE.GAME_OVER) {
+
+                } else {
+
+                }
+                //if(GameValues.GAMEMODE !== GameConstants.GAME_MODE.PAUSED) {
+                //    vm.steve.normalMode();
+                //}
+                //else if(gameMode === GAME_MODE.GAME_OVER) {
+                //    vm.steve.normalMode();
+                //    vm.steve.position.x = 0;
+                //    GameValues.camera.x = vm.steve.position.x - 100;
+                //}
             });
 
             $scope.$on('engineStarted', function engineStartedEvent() {
