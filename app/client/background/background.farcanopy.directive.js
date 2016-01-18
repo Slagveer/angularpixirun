@@ -6,9 +6,9 @@
         .module('hud')
         .directive('backgroundFarCanopy', BackgroundFarCanopy);
 
-    BackgroundFarCanopy.$inject = ['$window', 'RprEngineService', 'GameConstants', 'AssetsLoadService'];
+    BackgroundFarCanopy.$inject = ['$window', 'RprEngineService', 'GameConstants', 'RprEngineValues', 'AssetsLoadService'];
 
-    function BackgroundFarCanopy($window, RprEngineService, GameConstants, AssetsLoadService) {
+    function BackgroundFarCanopy($window, RprEngineService, GameConstants, RprEngineValues, AssetsLoadService) {
         var directive = {
             link: BackgroundFarCanopyLink,
             templateUrl: 'app/client/background/background.farcanopy.view.ng.html',
@@ -29,7 +29,7 @@
 
         function BackgroundFarCanopyController($scope, RprEngineService) {
             var vm = this;
-            
+
             vm.engine = RprEngineService;
             AssetsLoadService.load(GameConstants.GAME_ASSETS).then(function(){
                 vm.farCanopy = new GAME.BackgroundElement(PIXI.Texture.fromFrame("02_front_canopy.png"), 0, vm.container);
@@ -42,7 +42,7 @@
 
             $scope.$on('updateTransform', function updateTransformEvent(evt, data) {
                 vm.scrollPosition = data.scrollPosition;
-                vm.farCanopy.setPosition(vm.scrollPosition);
+                vm.farCanopy.setPosition(vm.scrollPosition, RprEngineValues);
             });
         }
 

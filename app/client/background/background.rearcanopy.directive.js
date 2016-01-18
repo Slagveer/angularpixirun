@@ -6,9 +6,9 @@
         .module('hud')
         .directive('backgroundRearCanopy', BackgroundRearCanopy);
 
-    BackgroundRearCanopy.$inject = ['$window', 'RprEngineService', 'GameConstants', 'AssetsLoadService'];
+    BackgroundRearCanopy.$inject = ['$window', 'RprEngineService', 'GameConstants', 'RprEngineValues', 'AssetsLoadService'];
 
-    function BackgroundRearCanopy($window, RprEngineService, GameConstants, AssetsLoadService) {
+    function BackgroundRearCanopy($window, RprEngineService, GameConstants, RprEngineValues, AssetsLoadService) {
         var directive = {
             link: BackgroundRearCanopyLink,
             templateUrl: 'app/client/background/background.rearcanopy.view.ng.html',
@@ -29,7 +29,7 @@
 
         function BackgroundRearCanopyController($scope, RprEngineService) {
             var vm = this;
-            
+
             vm.engine = RprEngineService;
             AssetsLoadService.load(GameConstants.GAME_ASSETS).then(function(){
                 vm.rearCanopy = new GAME.BackgroundElement(PIXI.Texture.fromFrame("03_rear_canopy.png"), 0, vm.container);
@@ -42,7 +42,7 @@
 
             $scope.$on('updateTransform', function updateTransformEvent(evt, data) {
                 vm.scrollPosition = data.scrollPosition;
-                vm.rearCanopy.setPosition(vm.scrollPosition);
+                vm.rearCanopy.setPosition(vm.scrollPosition, RprEngineValues);
             });
         }
 

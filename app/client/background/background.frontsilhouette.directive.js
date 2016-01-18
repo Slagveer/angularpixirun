@@ -6,9 +6,9 @@
         .module('hud')
         .directive('backgroundFrontSilhouette', BackgroundFrontSilhouette);
 
-    BackgroundFrontSilhouette.$inject = ['$window', 'RprEngineService', 'GameConstants', 'AssetsLoadService'];
+    BackgroundFrontSilhouette.$inject = ['$window', 'RprEngineService', 'GameConstants', 'RprEngineValues', 'AssetsLoadService'];
 
-    function BackgroundFrontSilhouette($window, RprEngineService, GameConstants, AssetsLoadService) {
+    function BackgroundFrontSilhouette($window, RprEngineService, GameConstants, RprEngineValues, AssetsLoadService) {
         var directive = {
             link: BackgroundFrontSilhouetteLink,
             templateUrl: 'app/client/background/background.frontsilhouette.view.ng.html',
@@ -29,7 +29,7 @@
 
         function BackgroundFrontSilhouetteController($scope, RprEngineService) {
             var vm = this;
-            
+
             vm.engine = RprEngineService;
             AssetsLoadService.load(GameConstants.GAME_ASSETS).then(function(){
                 vm.frontSilhouette = new GAME.BackgroundElement(PIXI.Texture.fromFrame("01_front_silhouette.png"), 424, vm.container);
@@ -42,7 +42,7 @@
 
             $scope.$on('updateTransform', function updateTransformEvent(evt, data) {
                 vm.scrollPosition = data.scrollPosition;
-                vm.frontSilhouette.setPosition(vm.scrollPosition);
+                vm.frontSilhouette.setPosition(vm.scrollPosition, RprEngineValues);
             });
         }
 

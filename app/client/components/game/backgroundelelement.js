@@ -22,7 +22,7 @@ GAME.BackgroundElement = function(texture, y, owner)
 
 GAME.BackgroundElement.prototype.constructor = GAME.BackgroundElement;
 
-GAME.BackgroundElement.prototype.setPosition = function(position)
+GAME.BackgroundElement.prototype.setPosition = function(position, game)
 {
     var h = this.spriteWidth;
 
@@ -33,6 +33,6 @@ GAME.BackgroundElement.prototype.setPosition = function(position)
         pos %=  h * this.sprites.length ;
         pos +=  h * 2;
 
-        this.sprites[i].position.x = Math.floor(pos) -GAME.xOffset
+        this.sprites[i].position.x = Math.floor(pos) - game.XOFFSET; console.log(Math.floor(game.xOffset))
     };
 }

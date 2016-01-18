@@ -17,7 +17,8 @@
             controllerAs: 'hudLogoViewController',
             bindToController: true,
             scope: {
-                container: '='
+                container: '=',
+                hudController: '='
             }
         }
 
@@ -31,7 +32,7 @@
             var vm = this;
 
             vm.engine = RprEngineService;
-            AssetsLoadService.load(GameConstants.GAME_ASSETS).then(function(){
+            AssetsLoadService.load(GameConstants.GAME_ASSETS).then(function(){ console.log(vm.hudController)
                 vm.logo = new PIXI.Sprite.fromImage("runLogo.png");
                 vm.logo.anchor.x = 0.5;
                 vm.logo.anchor.y = 0.5;

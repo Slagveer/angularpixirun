@@ -6,9 +6,9 @@
         .module('hud')
         .directive('backgroundRoofLeaves', BackgroundRoofLeaves);
 
-    BackgroundRoofLeaves.$inject = ['$window', 'RprEngineService', 'GameConstants', 'AssetsLoadService'];
+    BackgroundRoofLeaves.$inject = ['$window', 'RprEngineService', 'GameConstants', 'RprEngineValues', 'AssetsLoadService'];
 
-    function BackgroundRoofLeaves($window, RprEngineService, GameConstants, AssetsLoadService) {
+    function BackgroundRoofLeaves($window, RprEngineService, GameConstants, RprEngineValues, AssetsLoadService) {
         var directive = {
             link: BackgroundRoofLeavesLink,
             templateUrl: 'app/client/background/background.roofleaves.view.ng.html',
@@ -29,7 +29,7 @@
 
         function BackgroundRoofLeavesController($scope, RprEngineService) {
             var vm = this;
-            
+
             vm.engine = RprEngineService;
             AssetsLoadService.load(GameConstants.GAME_ASSETS).then(function(){
                 vm.roofLeaves = new GAME.BackgroundElement(PIXI.Texture.fromFrame("00_roof_leaves.png"), 0, vm.container);
@@ -42,7 +42,7 @@
 
             $scope.$on('updateTransform', function updateTransformEvent(evt, data) {
                 vm.scrollPosition = data.scrollPosition;
-                vm.roofLeaves.setPosition(vm.scrollPosition);
+                vm.roofLeaves.setPosition(vm.scrollPosition, RprEngineValues);
             });
         }
 
