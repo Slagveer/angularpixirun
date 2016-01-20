@@ -42,7 +42,7 @@
                                 i--;
                             }
                         } else {
-                            if(pickup.view.position.x < -100-GAME.xOffset)
+                            if(pickup.view.position.x < -100 - RprEngineValues.XOFFSET)
                             {
                                 //this.engine.view.game.removeChild(pickup.view);
                                 this.send('removePickup', pick.view);

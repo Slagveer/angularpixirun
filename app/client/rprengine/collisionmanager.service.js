@@ -70,8 +70,8 @@
                     steve.onGround = false;
                     if(steve.position.y > 610) {
                         if(this.engine.isPlaying) {
-                            steve.boil();
-                            //this.engine.view.doSplash();
+                            this.engine.boilsteve();
+                            this.engine.dosplash();
                             this.engine.gameover();
                         } else {
                             steve.speed.x *= 0.95;

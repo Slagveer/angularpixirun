@@ -24,10 +24,10 @@
             //
         }
 
-        LavaViewController.$inject = ['$rootScope', '$scope', '$window', '$state', 'RprEngineService',
+        LavaViewController.$inject = ['$rootScope', '$scope', '$window', '$state', 'RprEngineService', 'SteveValues',
             'ResizeService', 'LavaConstants', 'GameConstants', 'AssetsLoadService', 'RprEngineValues', 'GameValues'];
 
-        function LavaViewController($rootScope, $scope, $window, $state, RprEngineService,
+        function LavaViewController($rootScope, $scope, $window, $state, RprEngineService, SteveValues,
         ResizeService, LavaConstants, GameConstants, AssetsLoadService, RprEngineValues, GameValues) {
             var vm = this;
             var amount = LavaConstants.AMOUNT;
@@ -43,6 +43,10 @@
 
             AssetsLoadService.load(GameConstants.GAME_ASSETS).then(function(){
                 vm.lava = new GAME.Lava(vm.container, LavaConstants.TEXTURES, RprEngineValues.XOFFSET);
+            });
+
+            $scope.$on('gameover', function updateEvent() {
+
             });
 
             $scope.$on('update', function updateEvent() {

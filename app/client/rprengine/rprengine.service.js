@@ -85,6 +85,9 @@
                 tap: function () {
                     this.send('tapped', {});
                 },
+                boilsteve: function () {
+                    this.send('boilsteve', {});
+                },
                 countdown: function () {
                     this.send('countdown', {});
                 },
@@ -92,6 +95,9 @@
                     this.joyrideMode = false;
                     this.pickupCount = 0;
                     this.bulletMult += 0.3;
+                },
+                dosplash: function() {
+                    this.send('dosplash');
                 },
                 gameover: function() {
                     this.isPlaying = false;

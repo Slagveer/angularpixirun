@@ -45,6 +45,10 @@
 
             });
 
+            $scope.$on('dospash', function updateEvent() {
+                vm.splash.splash(SteveValues.POSITION);
+            });
+
             ResizeService.subscribe($rootScope, resized);
 
             function resized(event, data) {

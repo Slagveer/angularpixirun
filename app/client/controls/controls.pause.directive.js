@@ -29,7 +29,7 @@
 
         function ControlsPauseButtonController($scope, RprEngineService) {
             var vm = this;
-            
+
             vm.engine = RprEngineService;
             AssetsLoadService.load(GameConstants.GAME_ASSETS).then(function(){
                 vm.pauseButton = new PIXI.Sprite.fromImage("pause.png");
@@ -57,8 +57,15 @@
                 //console.log(vm.container);
             });
 
-            $scope.$on('gameover', function updateEvent() {
+            $scope.$on('gameover', function gameoverEvent() {
                 vm.pauseButton.interactive = false;
+                new TWEEN.Tween(vm.pauseButton.scale).to({
+                        alpha : 0
+                    }, 600)
+                    .onComplete(function () {
+                        vm.pauseButton.visible = false;
+                    })
+                    .start();
             });
 
             $scope.$on('countdownCompleted', function countdownCompleted() {

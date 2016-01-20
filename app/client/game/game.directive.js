@@ -62,6 +62,11 @@
                 }
             });
 
+            $scope.$on('gameover', function gameover(evt, data) {
+                //GameValues.GAMEMODE = GameConstants.GAME_MODE.GAME_OVER;
+                GameValues.INTERACTIVE = false;
+            });
+
             $scope.$on('pausePressed', function pausePressed(evt, data) {
                 if(GameValues.GAMEMODE === GameConstants.GAME_MODE.PAUSED){
                     GameValues.INTERACTIVE = true;

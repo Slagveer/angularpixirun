@@ -55,6 +55,7 @@
             });
 
             $scope.$on('update', function updateEvent() {
+                SteveValues.POSITION = vm.steve.position;
                 if(GameValues.GAMEMODE !== GameConstants.GAME_MODE.PAUSED) {
                     RprEngineService.levelCount += TimeService.DELTA_TIME;
                     if(RprEngineService.levelCount > (60 * 60)) {
@@ -62,6 +63,14 @@
                     }
                 }
                 vm.steve.update(TimeService, GameValues.CAMERA, vm.engine);
+            });
+
+            $scope.$on('gameover', function onGameOver() {
+                vm.container.addChild(vm.steve.view);
+            });
+
+            $scope.$on('boilsteve', function boilsteve() {
+                vm.steve.boil();
             });
 
             $scope.$on('tapped', function onTapped() {
@@ -83,6 +92,12 @@
                 //    GameValues.camera.x = vm.steve.position.x - 100;
                 //}
             });
+
+            //$scope.$on('countdown', function engineStartedEvent() {
+            //    vm.steve.normalMode();
+            //    vm.steve.position.x = 0;
+            //    GameValues.CAMERA.x = vm.steve.position.x - 100;
+            //});
 
             $scope.$on('engineStarted', function engineStartedEvent() {
                 vm.steve.level = 1;

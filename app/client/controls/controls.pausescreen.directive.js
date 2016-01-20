@@ -29,7 +29,7 @@
 
         function ControlsPauseScreenController($scope, RprEngineService) {
             var vm = this;
-            
+
             vm.engine = RprEngineService;
             AssetsLoadService.load(GameConstants.GAME_ASSETS).then(function(){
                 vm.pauseScreen = PIXI.Sprite.fromImage("pausedPanel.png");

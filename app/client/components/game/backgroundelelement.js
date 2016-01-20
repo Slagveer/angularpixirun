@@ -33,6 +33,6 @@ GAME.BackgroundElement.prototype.setPosition = function(position, game)
         pos %=  h * this.sprites.length ;
         pos +=  h * 2;
 
-        this.sprites[i].position.x = Math.floor(pos) - game.XOFFSET; console.log(Math.floor(game.xOffset))
+        this.sprites[i].position.x = Math.floor(pos) - game.XOFFSET;
     };
 }

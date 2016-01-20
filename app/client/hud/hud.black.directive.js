@@ -70,7 +70,7 @@
                                     alpha: 0
                                 }, 300)
                                 .onComplete(function() {
-                                    this.send('countdown');
+                                    vm.engine.countdown('countdown');
                                 }).start();
                         })
                         .start();

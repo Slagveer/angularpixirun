@@ -162,6 +162,10 @@
                 vm.gameFront.removeChild(enemy.view);
             });
 
+            $scope.$on('gameover', function gameover() {
+
+            });
+
             ResizeService.subscribe($rootScope, resized);
 
             function resized(event, data) {
