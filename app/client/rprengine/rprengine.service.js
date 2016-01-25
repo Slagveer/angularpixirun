@@ -6,9 +6,11 @@
     angular
         .module('rprengine')
         .factory('RprEngineService', ['$q', '$rootScope', 'TimeService', 'GameValues', 'GameConstants', 'PickupManagerService',
-            'SteveValues', 'SegmentManagerService', 'FloorManagerService', 'CollisionManagerService', 'EnemyManagerService',
+            'SteveValues', 'SegmentManagerService', 'FloorManagerService', 'CollisionManagerService',
+            'EnemyManagerService', 'RprEngineValues',
             function($q, $rootScope, TimeService, GameValues, GameConstants,
-                                    PickupManagerService, SteveValues, SegmentManagerService, FloorManagerService, CollisionManagerService, EnemyManagerService) {
+                PickupManagerService, SteveValues, SegmentManagerService, FloorManagerService, CollisionManagerService,
+                     EnemyManagerService, RprEngineValues) {
             GameValues.CAMERA = new PIXI.Point();
             var factory = {
                 bulletMult: 1,
@@ -85,19 +87,30 @@
                 tap: function () {
                     this.send('tapped', {});
                 },
+                showgameover: function () {
+                    this.send('showgameover');
+                },
                 boilsteve: function () {
                     this.send('boilsteve', {});
                 },
                 countdown: function () {
                     this.send('countdown', {});
                 },
-                joyrideComplete: function() {
-                    this.joyrideMode = false;
-                    this.pickupCount = 0;
-                    this.bulletMult += 0.3;
-                },
                 dosplash: function() {
                     this.send('dosplash');
+                },
+                setnormalmode: function() {
+                    this.send('normalmode');
+                },
+                setstevenormalmode: function() {
+                    this.send('stevenormalmode');
+                },
+                joyrideComplete: function() {
+                    RprEngineValues.JOYRIDEMODE = false;
+                    RprEngineValues.PICKUPCOUNT = 0;
+                    RprEngineValues.BULLETMULT += 0.3;
+                    this.setnormalmode();
+                    this.setstevenormalmode();
                 },
                 gameover: function() {
                     this.isPlaying = false;

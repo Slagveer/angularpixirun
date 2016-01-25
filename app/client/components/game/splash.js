@@ -24,8 +24,8 @@ GAME.Splash = function(camera)
 	                 PIXI.Texture.fromFrame("lavaFrame_10.png"),
 	                 PIXI.Texture.fromFrame("lavaFrame_11.png"),
 	                 PIXI.Texture.fromFrame("lavaFrame_12.png")];
-	
-	PIXI.MovieClip.call(this, this.textures);
+
+	PIXI.extras.MovieClip.call(this, this.textures);
 	this.anchor.x = 0.5;
 	this.anchor.y = 1;
 	this.scale.x = this.scale.y = 2;
@@ -36,7 +36,7 @@ GAME.Splash = function(camera)
 }
 
 GAME.Splash.constructor = GAME.Splash;
-GAME.Splash.prototype = Object.create( PIXI.MovieClip.prototype );
+GAME.Splash.prototype = Object.create( PIXI.extras.MovieClip.prototype );
 
 GAME.Splash.prototype.splash = function(position)
 {
@@ -51,14 +51,13 @@ GAME.Splash.prototype.splash = function(position)
 GAME.Splash.prototype.updateTransform = function()
 {
 	if(!this.visible)return;
-	
-	PIXI.MovieClip.prototype.updateTransform.call(this);
+
+	PIXI.extras.MovieClip.prototype.updateTransform.call(this);
 	this.position.x = this.realPosition - this.camera.x;
-	
-	
+
 	if(this.currentFrame > this.textures.length-1)
 	{
 		this.stop();
-		this.visible =false;
+		this.visible = false;
 	}
 }

@@ -53,6 +53,12 @@
                 vm.background.updateTransform();
             });
 
+            $scope.$on('normalmode', function normalmodeEvent() {
+                vm.container.removeChild(this.background);
+                vm.background = vm.normalBackground;
+                vm.container.addChildAt(vm.background, 0);
+            });
+
             ResizeService.subscribe($rootScope, resized);
 
             function resized(event, data) {

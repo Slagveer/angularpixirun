@@ -16,11 +16,11 @@
                     $rootScope.$broadcast(msg, data);
                 },
                 update: function () {
-                    for ( var i=0;i<this.floors.length;i++) {
+                    for(var i=0;i<this.floors.length;i++) {
                         var floor = this.floors[i];
 
-                        floor.position.x = floor.x - GameValues.CAMERA.x -16;
-                        if(floor.position.x < (-1135 - RprEngineValues.XOFFSET -16)) {
+                        //floor.position.x = floor.x - GameValues.CAMERA.x - 16;
+                        if(floor.position.x < (-1135 - RprEngineValues.XOFFSET - 16)) {
                             this.floorPool.returnObject(floor);
                             this.floors.splice(i, 1);
                             i--;

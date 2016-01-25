@@ -25,10 +25,10 @@
         }
 
         RprengineSplashViewController.$inject = ['$rootScope', '$scope', '$window', '$state', 'RprEngineService',
-            'ResizeService', 'BackgroundConstants', 'GameConstants', 'GameValues', 'AssetsLoadService'];
+            'ResizeService', 'BackgroundConstants', 'GameConstants', 'GameValues', 'AssetsLoadService', 'SteveValues'];
 
         function RprengineSplashViewController($rootScope, $scope, $window, $state, RprEngineService,
-                                          ResizeService, BackgroundConstants, GameConstants, GameValues, AssetsLoadService) {
+            ResizeService, BackgroundConstants, GameConstants, GameValues, AssetsLoadService, SteveValues) {
             var vm = this;
 
             vm.joyrideComplete = joyrideComplete;
@@ -45,7 +45,7 @@
 
             });
 
-            $scope.$on('dospash', function updateEvent() {
+            $scope.$on('dosplash', function updateEvent() {
                 vm.splash.splash(SteveValues.POSITION);
             });
 

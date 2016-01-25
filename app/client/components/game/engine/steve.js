@@ -63,8 +63,8 @@ GAME.Steve.prototype.update = function(time, camera, engine)
 GAME.Steve.prototype.joyrideMode = function()
 {
 	this.joyRiding = true;
-    FidoAudio.setVolume('runRegular', 0);
-    FidoAudio.play('hyperMode');
+    //FidoAudio.setVolume('runRegular', 0);
+    //FidoAudio.play('hyperMode');
 	TweenLite.to(this.speed, 0.3, {
         x : 20,
         ease : Cubic.easeIn
@@ -207,22 +207,22 @@ GAME.Steve.prototype.die = function()
 {
 	if(this.isDead) return;
 
-    FidoAudio.setVolume('runFast', 0);
-    FidoAudio.setVolume('runRegular', 0);
-    FidoAudio.fadeOut('gameMusic');
+    //FidoAudio.setVolume('runFast', 0);
+    //FidoAudio.setVolume('runRegular', 0);
+    //FidoAudio.fadeOut('gameMusic');
 
-	TweenLite.to(this.time, 0.5, {
-        speed : 0.1,
-        ease : Cubic.easeOut,
-        onComplete : function()
-        {
-            FidoAudio.play('deathJingle');
-            TweenLite.to(this.time, 2, {
+    new TWEEN.Tween(this.time).to({
+            speed : 0.1
+        }, 100)
+        .easing(TWEEN.Easing.Cubic.Out)
+        .onComplete(function() {
+            console.log(this.time)
+            //FidoAudio.play('deathJingle');
+            new TWEEN.Tween(this.time).to({
                 speed : 1,
                 delay : 1
-            });
-        }
-    });
+                }, 2000).start();
+        }.bind(this)).start();
 
 	this.isDead = true;
 	this.bounce = 0;
@@ -257,11 +257,13 @@ GAME.Steve.prototype.isAirbourne = function(){}
 GAME.Steve.prototype.stop = function()
 {
     this.view.stop();
-    FidoAudio.setVolume('runRegular', 0);
+    //FidoAudio.setVolume('runRegular', 0);
 }
 
 GAME.Steve.prototype.resume = function()
 {
     this.view.play();
-    if(this.onGround) FidoAudio.setVolume('runRegular', this.volume);
+    if(this.onGround) {
+        //FidoAudio.setVolume('runRegular', this.volume);
+    }
 }

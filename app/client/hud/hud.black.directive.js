@@ -66,11 +66,22 @@
                             alpha: 1
                         }, 300)
                         .onComplete(function onCompleted() {
+                            vm.engine.setstevenormalmode();
+                            vm.engine.joyrideComplete();
+                            SteveValues.STEVE.position.x = 0;
+                            GameValues.CAMERA.x = SteveValues.STEVE.position.x - 100;
+                            this.engine.reset();
+                            GameValues.GAME_MODE = GameConstants.GAME_MODE.COUNT_DOWN;
+                            TWEEN.Tween.kill(GameValues.CAMERA);
+                            GameValues.CAMERA.zoom = 1;
+
                             new TWEEN.Tween(vm.black).to({
                                     alpha: 0
                                 }, 300)
                                 .onComplete(function() {
-                                    vm.engine.countdown('countdown');
+                                    this.engine.start();
+                                    //FidoAudio.fadeIn('gameMusic');
+                                    vm.engine.countdown();
                                 }).start();
                         })
                         .start();

@@ -6,8 +6,8 @@
     angular
         .module('rprengine')
         .factory('EnemyManagerService', ['$q', '$rootScope', 'TimeService', 'GameValues',
-            'GameConstants', 'EnemyManagerConstants', 'RprEngineValues',
-            function($q, $rootScope, TimeService, GameValues, GameConstants, EnemyManagerConstants, RprEngineValues) {
+            'GameConstants', 'EnemyManagerConstants', 'RprEngineValues', 'SteveValues',
+            function($q, $rootScope, TimeService, GameValues, GameConstants, EnemyManagerConstants, RprEngineValues, SteveValues) {
             var factory = {
                 enemies: [],
                 enemyPool: new GAME.GameObjectPool(GAME.Enemy),
@@ -19,7 +19,7 @@
                     for(var i=0;i<this.enemies.length;i++) {
                         var enemy = this.enemies[i];
                         enemy.update();
-                        if(enemy.view.position.x < -100 - RprEngineValues.XOFFSET && !this.engine.steve.isDead) {
+                        if(enemy.view.position.x < -100 - RprEngineValues.XOFFSET && !SteveValues.STEVE.isDead) {
                             this.enemyPool.returnObject(enemy);
                             this.enemies.splice(i, 1);
                             //this.engine.view.gameFront.removeChild(enemy.view);

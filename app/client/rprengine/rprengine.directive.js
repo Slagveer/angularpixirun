@@ -191,6 +191,19 @@
                     .easing(TWEEN.Easing.Sine.Out)
                     .start();
             }
+
+            function normalMode() {
+                this.engine.setnormalmode();
+
+                vm.stage.addChild(vm.white)
+                vm.white.alpha = 1;
+
+                new TWEEN.Tween(vm.white).to({
+                        alpha: 0
+                    })
+                    .easing(TWEEN.Easing.Sine.Out)
+                    .start();
+            }
         }
 
         return directive;

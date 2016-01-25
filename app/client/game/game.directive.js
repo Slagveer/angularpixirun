@@ -75,18 +75,18 @@
                 }
             });
 
+            $scope.$on('countdownCompleted', function countdownCompleted() {
+                GameValues.INTERACTIVE = true;
+                GameValues.GAMEMODE = GameConstants.GAME_MODE.PLAYING;
+            });
+
             function init() {
-                GameValues.GAMEMODE = GameConstants.GAME_MODE.INTRO;
+                //GameValues.GAMEMODE = GameConstants.GAME_MODE.INTRO;
                 vm.engine = RprEngineService;
 
                 AssetsLoadService
                     .load(GameConstants.GAME_ASSETS)
                     .then(onSucces, onError);
-
-                $scope.$on('countdownCompleted', function countdownCompleted() {
-                    GameValues.INTERACTIVE = true;
-                    GameValues.GAMEMODE = GameConstants.GAME_MODE.PLAYING;
-                });
 
                 if(RprEngineValues.LOW_MODE === true) {
                     $interval(update, 1000/30);

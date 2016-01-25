@@ -73,6 +73,11 @@
                 vm.steve.boil();
             });
 
+            $scope.$on('stevenormalmode', function stevenormalmode() {
+                vm.steve.normalMode();
+                vm.steve.position.x = 0;
+            });
+
             $scope.$on('tapped', function onTapped() {
                 if(GameValues.GAMEMODE === GameConstants.GAME_MODE.INTRO){
 
@@ -81,7 +86,11 @@
                 }else if(GameValues.GAMEMODE === GameConstants.GAME_MODE.GAME_OVER) {
 
                 } else {
-
+                    // handle our jump sound
+                    // thrusters = true;
+                    if(GameValues.isPlaying) {
+                        vm.steve.jump();
+                    }
                 }
                 //if(GameValues.GAMEMODE !== GameConstants.GAME_MODE.PAUSED) {
                 //    vm.steve.normalMode();

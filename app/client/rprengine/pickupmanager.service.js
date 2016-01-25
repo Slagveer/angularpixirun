@@ -38,14 +38,14 @@
                                 this.pickupPool.returnObject(pickup);
                                 this.pickups.splice(i, 1);
                                 //this.engine.view.game.removeChild(pickup.view);
-                                this.send('removePickup', pick.view);
+                                this.send('removePickup', pickup.view);
                                 i--;
                             }
                         } else {
                             if(pickup.view.position.x < -100 - RprEngineValues.XOFFSET)
                             {
                                 //this.engine.view.game.removeChild(pickup.view);
-                                this.send('removePickup', pick.view);
+                                this.send('removePickup', pickup.view);
                                 this.pickupPool.returnObject(pickup);
                                 this.pickups.splice(i, 1);
                                 i--;
@@ -63,7 +63,7 @@
                     pickup.position.y = y;
                     this.pickups.push(pickup);
                     //this.engine.view.game.addChild(pickup.view);
-                    //this.send('addPickup', pick.view);
+                    this.send('addPickup', pickup);
                 },
                 removePickup: function(index) {
                     var pickup = this.pickups[index];

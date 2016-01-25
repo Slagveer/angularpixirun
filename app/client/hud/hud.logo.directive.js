@@ -52,7 +52,7 @@
                 //
             });
 
-            $scope.$on('gameover', function updateEvent() {
+            $scope.$on('showgameover', function showgameoverEvent() {
                 vm.logo.visible = true;
                 new TWEEN.Tween(vm.logo).to({
                         alpha: 1
