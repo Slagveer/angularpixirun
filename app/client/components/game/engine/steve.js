@@ -101,15 +101,17 @@ GAME.Steve.prototype.updateRunning = function()
 	if(this.isFlying)
 	{
 		this.accel = 0.6;
-		this.speed.y -= this.accel  * this.time.DELTA_TIME;
-		if(this.speed.y > 0) this.speed.y -= 0.3 * this.time.DELTA_TIME;
+		this.speed.y -= this.accel * this.time.DELTA_TIME;
+		if(this.speed.y > 0) {
+            this.speed.y -= 0.3 * this.time.DELTA_TIME;
+        }
 	}
 	else
 	{
 		if(this.speed.y < 0) this.speed.y += 0.05 * this.time.DELTA_TIME;
 	}
 
-	this.speed.y += this.gravity  * this.time.DELTA_TIME;
+	this.speed.y += this.gravity * this.time.DELTA_TIME;
 
 	if(this.speed.y > 8) this.speed.y = 8;
 	if(this.speed.y < -9) this.speed.y = -9;
@@ -187,7 +189,7 @@ GAME.Steve.prototype.jump = function()
 	{
 		if(this.speed.x < 5)
 		{
-			this.isDead = false
+			this.isDead = false;
 			this.speed.x = 10;
 		}
 	}

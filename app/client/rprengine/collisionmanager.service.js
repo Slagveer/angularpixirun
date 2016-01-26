@@ -75,7 +75,7 @@
                             this.engine.gameover();
                         } else {
                             steve.speed.x *= 0.95;
-                            if(!GameValues.INTERACTIVE) { console.log(steve)
+                            if(!GameValues.INTERACTIVE) {
                                 this.engine.showgameover();
                                 GameValues.INTERACTIVE = true;
                             }

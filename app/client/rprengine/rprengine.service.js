@@ -39,7 +39,7 @@
                     GameValues.CAMERA.y = targetCamY;
 
                     if (GameValues.GAMEMODE !== GameConstants.GAME_MODE.PAUSED) {
-                        SteveValues.STEVE.update(TimeService,GameValues.CAMERA, this);
+                        SteveValues.STEVE.update(TimeService, GameValues.CAMERA, this);
                         CollisionManagerService.update(this);
                         SegmentManagerService.update();
                         FloorManagerService.update();
@@ -71,6 +71,7 @@
                     SegmentManagerService.reset();
                     EnemyManagerService.destroyAll();
                     PickupManagerService.destroyAll();
+                    GameValues.isPlaying = true;
                     this.send('engineStarted', {});
                     this.isPlaying = true;
                     this.gameReallyOver = false;
@@ -113,6 +114,7 @@
                     this.setstevenormalmode();
                 },
                 gameover: function() {
+                    GameValues.isPlaying = false;
                     this.isPlaying = false;
                     this.isDying = true;
                     SegmentManagerService.chillMode = true;

@@ -19,7 +19,7 @@
                     for(var i=0;i<this.floors.length;i++) {
                         var floor = this.floors[i];
 
-                        //floor.position.x = floor.x - GameValues.CAMERA.x - 16;
+                        floor.position.x = floor.xPosition - GameValues.CAMERA.x - 16;
                         if(floor.position.x < (-1135 - RprEngineValues.XOFFSET - 16)) {
                             this.floorPool.returnObject(floor);
                             this.floors.splice(i, 1);
@@ -32,7 +32,11 @@
                 addFloor: function(floorData) {
                     var floor = this.floorPool.getObject();
 
-                    floor.x = floorData;
+                    if(!_.has(floor,'xPosition')) {
+                        _.extend(floor, {
+                            xPosition: floorData
+                        });
+                    }
                     floor.position.y = 640 - 158;
                     //RprEngineValues.GAMEFRONT.addChild(floor);
                     this.send('addFloor', floor);
@@ -43,7 +47,7 @@
                         var floor = this.floors[i];
 
                         this.floorPool.returnObject(floor);
-                        RprEngineValues.GAMEFRONT.removeChild(floor);
+                        //RprEngineValues.GAMEFRONT.removeChild(floor);
                         this.send('removeFloor', floor);
                     }
                     this.floors = [];
