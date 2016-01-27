@@ -40,6 +40,7 @@
             $scope.$on('update', function updateEvent() {
                 if(typeof vm.target !== 'undefined') {
                     vm.trail.target = SteveValues.STEVE;
+                    vm.trail.update();
                 }
             });
 

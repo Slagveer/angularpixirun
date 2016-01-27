@@ -21,15 +21,15 @@ GAME.SteveTrailFire = function(stage)
 // constructor
 GAME.SteveTrailFire.constructor = GAME.SteveTrailFire;
 
-GAME.SteveTrailFire.prototype.update = function()
-{
+GAME.SteveTrailFire.prototype.update = function() {
+
 	//PIXI.Rope.prototype.updateTransform.call(this);
 
 	if(this.target.isDead)
 	{
-		this.mOffset
+		this.mOffset;
 
-		PIXI.mat3.multiply(this.mOffset, this.target.view.localTransform, this.spare);
+		PIXI.mat3.multiply(this.mOffset, this.target.view.worldTransform, this.spare);
 
 		this.count++;
 
@@ -40,14 +40,14 @@ GAME.SteveTrailFire.prototype.update = function()
 
 
 			this.stage.addChild(partical);
-			partical.position.x =this.spare[2]
-			partical.position.y = this.spare[5]
+			partical.position.x =this.spare[2];
+			partical.position.y = this.spare[5];
 
 			partical.speed.x = 1+Math.random()*2;
 			partical.speed.y = 1+Math.random()*2;
 
-			partical.speed.x *= -1
-			partical.speed.y *=1
+			partical.speed.x *= -1;
+			partical.speed.y *=1;
 			/*
 			partical.direction = 0;
 			partical.dirSpeed = Math.random() > 0.5 ? -0.1 : 0.1
@@ -64,8 +64,7 @@ GAME.SteveTrailFire.prototype.update = function()
 
 	}// add partical!
 
-	for (var i=0; i < this.particals.length; i++)
-	{
+	for (var i=0; i < this.particals.length; i++) {
 		var partical =  this.particals[i];
 
 		partical.scale.x = partical.scale.y *= 1.02;

@@ -113,10 +113,14 @@ GAME.Steve.prototype.updateRunning = function()
 
 	this.speed.y += this.gravity * this.time.DELTA_TIME;
 
-	if(this.speed.y > 8) this.speed.y = 8;
-	if(this.speed.y < -9) this.speed.y = -9;
+	if(this.speed.y > 8) {
+        this.speed.y = 8;
+    }
+	if(this.speed.y < -9) {
+        this.speed.y = -9;
+    }
 
-    var accel = this.speed.y - oldSpeed;
+    this.accel = this.speed.y - oldSpeed;
 	this.position.x += this.speed.x * this.time.DELTA_TIME * this.level;
 	this.position.y += this.speed.y * this.time.DELTA_TIME;
 

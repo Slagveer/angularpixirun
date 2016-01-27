@@ -39,6 +39,7 @@
 
             $scope.$on('update', function updateEvent() {
                 vm.trailFire.target = SteveValues.STEVE;
+                vm.trailFire.update();
             });
 
             ResizeService.subscribe($rootScope, resized);

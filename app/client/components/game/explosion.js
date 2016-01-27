@@ -43,7 +43,7 @@ GAME.Explosion = function()
 
 GAME.Explosion.constructor = GAME.Explosion;
 
-GAME.Explosion.prototype = Object.create( PIXI.DisplayObjectContainer.prototype );
+GAME.Explosion.prototype = Object.create( PIXI.Container.prototype );
 
 GAME.Explosion.prototype.explode = function()
 {
@@ -114,7 +114,7 @@ GAME.Explosion.prototype.updateTransform = function()
 		}
 	}
 
-	PIXI.DisplayObjectContainer.prototype.updateTransform.call( this );
+	PIXI.Container.prototype.updateTransform.call( this );
 }
 
 ExplosionPartical = function(id)

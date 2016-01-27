@@ -150,15 +150,15 @@
                 vm.gameFront.addChild(floor);
             });
 
-            $scope.$on('removeFloor', function removeFloorEvent(floor) {
+            $scope.$on('removeFloor', function removeFloorEvent(event, floor) {
                 vm.gameFront.removeChild(floor);
             });
 
-            $scope.$on('addEnemy', function addEnemyEvent(enemy) {
-                //vm.gameFront.addChild(enemy.view);
+            $scope.$on('addEnemy', function addEnemyEvent(event, enemy) {
+                vm.gameFront.addChild(enemy.view);
             });
 
-            $scope.$on('removeEnemy', function removeEnemyEvent(enemy) {
+            $scope.$on('removeEnemy', function removeEnemyEvent(event, enemy) {
                 vm.gameFront.removeChild(enemy.view);
             });
 

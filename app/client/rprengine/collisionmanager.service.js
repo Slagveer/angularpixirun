@@ -91,7 +91,7 @@
 
                     for(var i=0;i<max;i++) {
                         var floor = floors[i];
-                        var xdist = floor.x - steve.position.x + 1135;
+                        var xdist = floor.xPosition - steve.position.x + 1135;
 
                         if(steve.position.y > 477) {
                             if(xdist > 0 && xdist < 1135) {

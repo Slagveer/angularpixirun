@@ -7,7 +7,8 @@
         .module('rprengine')
         .factory('EnemyManagerService', ['$q', '$rootScope', 'TimeService', 'GameValues',
             'GameConstants', 'EnemyManagerConstants', 'RprEngineValues', 'SteveValues',
-            function($q, $rootScope, TimeService, GameValues, GameConstants, EnemyManagerConstants, RprEngineValues, SteveValues) {
+            function($q, $rootScope, TimeService, GameValues, GameConstants, EnemyManagerConstants, RprEngineValues,
+                     SteveValues) {
             var factory = {
                 enemies: [],
                 enemyPool: new GAME.GameObjectPool(GAME.Enemy),
