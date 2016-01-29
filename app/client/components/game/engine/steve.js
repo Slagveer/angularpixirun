@@ -5,6 +5,8 @@ if (typeof(GAME) === 'undefined') {
 	this.GAME = {};
 }
 
+'use strict';
+
 GAME.Steve = function(runningFrames, flyingFrames, crashFrames) {
 	this.position = new PIXI.Point();
 	this.runningFrames = [];
@@ -33,7 +35,7 @@ GAME.Steve = function(runningFrames, flyingFrames, crashFrames) {
 	this.activeCount = 0;
 	this.isFlying = false;
 	this.accel =0;
-	this.width = 26
+	this.width = 26;
 	this.height = 37;
 	this.onGround = false;
 	this.rotationSpeed = 0;
@@ -43,7 +45,7 @@ GAME.Steve = function(runningFrames, flyingFrames, crashFrames) {
     this.volume = 0.3;
 	this.time = null;
     this.camera = null;
-}
+};
 GAME.Steve.constructor = GAME.Steve;
 GAME.Steve.prototype.update = function(time, camera, engine)
 {
@@ -58,19 +60,20 @@ GAME.Steve.prototype.update = function(time, camera, engine)
 	{
 		this.updateRunning(this.time);
 	}
-}
+};
 
 GAME.Steve.prototype.joyrideMode = function()
 {
 	this.joyRiding = true;
     //FidoAudio.setVolume('runRegular', 0);
     //FidoAudio.play('hyperMode');
-	TweenLite.to(this.speed, 0.3, {
-        x : 20,
-        ease : Cubic.easeIn
-    });
+	TWEEN.Tween(this.speed).to({
+            x : 20
+        }, 300)
+        .easing(TWEEN.Easing.Cubic.In)
+        .start();
 	this.realAnimationSpeed = 0.23 * 4
-}
+};
 
 GAME.Steve.prototype.normalMode = function()
 {
@@ -86,28 +89,24 @@ GAME.Steve.prototype.normalMode = function()
         .start();
 
 	this.realAnimationSpeed = 0.23;
-}
+};
 
 GAME.Steve.prototype.updateRunning = function()
 {
 	this.view.animationSpeed = this.realAnimationSpeed * this.time.DELTA_TIME * this.level;
-	if(this.isActive)
-	{
+	if(this.isActive) {
 		this.isFlying = true;
 	}
 
 	var oldSpeed = this.speed.y;
 
-	if(this.isFlying)
-	{
+	if(this.isFlying === true) {
 		this.accel = 0.6;
 		this.speed.y -= this.accel * this.time.DELTA_TIME;
 		if(this.speed.y > 0) {
             this.speed.y -= 0.3 * this.time.DELTA_TIME;
         }
-	}
-	else
-	{
+	} else {
 		if(this.speed.y < 0) this.speed.y += 0.05 * this.time.DELTA_TIME;
 	}
 
@@ -156,7 +155,7 @@ GAME.Steve.prototype.updateRunning = function()
 	this.view.position.y = this.position.y - this.camera.y;
 
 	this.view.rotation += (this.speed.y * 0.05 - this.view.rotation) * 0.1;
-}
+};
 
 GAME.Steve.prototype.updateDieing = function()
 {
@@ -185,12 +184,11 @@ GAME.Steve.prototype.updateDieing = function()
 	{
 		this.view.rotation += this.rotationSpeed * this.time.DELTA_TIME;
 	}
-}
+};
 
 GAME.Steve.prototype.jump = function()
 {
-	if(this.isDead)
-	{
+	if(this.isDead) {
 		if(this.speed.x < 5)
 		{
 			this.isDead = false;
@@ -198,16 +196,13 @@ GAME.Steve.prototype.jump = function()
 		}
 	}
 
-	if(this.position.y !== this.ground)
-	{
+	if(this.position.y !== this.ground) {
 		this.isFlying = true;
-	}
-	else
-	{
+	} else {
 		this.isActive = true;
 		this.activeCount = 0;
 	}
-}
+};
 
 GAME.Steve.prototype.die = function()
 {
@@ -222,7 +217,6 @@ GAME.Steve.prototype.die = function()
         }, 100)
         .easing(TWEEN.Easing.Cubic.Out)
         .onComplete(function() {
-            console.log(this.time)
             //FidoAudio.play('deathJingle');
             new TWEEN.Tween(this.time).to({
                 speed : 1,
@@ -236,7 +230,7 @@ GAME.Steve.prototype.die = function()
 	this.speed.y = -15;
 	this.rotationSpeed = 0.3;
 	this.view.stop();
-}
+};
 
 
 GAME.Steve.prototype.boil = function()
@@ -250,21 +244,21 @@ GAME.Steve.prototype.boil = function()
     //FidoAudio.play('deathJingle');
 
 	this.isDead = true;
-}
+};
 
 GAME.Steve.prototype.fall = function()
 {
 	this.isActive = false;
 	this.isFlying = false;
-}
+};
 
-GAME.Steve.prototype.isAirbourne = function(){}
+GAME.Steve.prototype.isAirbourne = function(){};
 
 GAME.Steve.prototype.stop = function()
 {
     this.view.stop();
     //FidoAudio.setVolume('runRegular', 0);
-}
+};
 
 GAME.Steve.prototype.resume = function()
 {
@@ -272,4 +266,4 @@ GAME.Steve.prototype.resume = function()
     if(this.onGround) {
         //FidoAudio.setVolume('runRegular', this.volume);
     }
-}
+};

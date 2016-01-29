@@ -80,7 +80,7 @@
             vm.container.mouseup = vm.container.touchend = function(event) {
                 event.stopPropagation();
 
-
+                vm.engine.stoptap(event);
             };
 
             $scope.$on('tapped', function onTapped() {

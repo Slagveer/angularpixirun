@@ -62,7 +62,7 @@
                         vm.steve.level += 0.05;
                     }
                 }
-                vm.steve.update(TimeService, GameValues.CAMERA, vm.engine);
+                //vm.steve.update(TimeService, GameValues.CAMERA, vm.engine);
             });
 
             $scope.$on('gameover', function onGameOver() {
@@ -76,6 +76,12 @@
             $scope.$on('stevenormalmode', function stevenormalmode() {
                 vm.steve.normalMode();
                 vm.steve.position.x = 0;
+            });
+
+            $scope.$on('tapstopped', function onTapped() {
+                if(GameValues.isPlaying) {
+                    vm.steve.fall();
+                }
             });
 
             $scope.$on('tapped', function onTapped() {

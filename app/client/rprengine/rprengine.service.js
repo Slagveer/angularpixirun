@@ -88,6 +88,9 @@
                 tap: function () {
                     this.send('tapped', {});
                 },
+                stoptap: function () {
+                    this.send('tapstopped', {});
+                },
                 showgameover: function () {
                     this.send('showgameover');
                 },

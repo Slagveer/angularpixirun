@@ -65,7 +65,7 @@ GAME.SteveTrailFire.prototype.update = function() {
 	}// add partical!
 
 	for (var i=0; i < this.particals.length; i++) {
-		var partical =  this.particals[i];
+		var partical = this.particals[i];
 
 		partical.scale.x = partical.scale.y *= 1.02;
 			partical.alphay *= 0.85;
