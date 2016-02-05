@@ -38,7 +38,7 @@
             GameValues.GAMEMODE = GameConstants.GAME_MODE.TITLE;
 
             $scope.$watch(function() {
-                return GameValues.GAME_MODE;
+                return GameValues.GAMEMODE;
             }, function(newVal) {
                 vm.mode = newVal;
             }, true);
@@ -50,7 +50,7 @@
                 init();
             });
 
-            $scope.$on('tapped', function onTapped(evt, data) {
+            $scope.$on('tapped', function onTapped(evt, data) { console.log(GameValues.GAMEMODE)
                 if(GameValues.GAMEMODE === GameConstants.GAME_MODE.INTRO){
 
                 }else if(GameValues.GAMEMODE === GameConstants.GAME_MODE.TITLE) {

@@ -57,7 +57,7 @@
                             ydist = pickup.position.y - steve.position.y;
                             if(ydist > -pickup.height/2 && ydist < pickup.height/2) {
                                 PickupManagerService.removePickup(i);
-                                //this.engine.pickup();
+                                this.engine.pickup();
                             }
                         }
                     }

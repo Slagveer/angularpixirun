@@ -83,6 +83,10 @@
                 vm.engine.stoptap(event);
             };
 
+            $scope.$watch(function() { return GameValues;}, function(newVal) {
+                console.log(newVal);
+            }, true);
+
             $scope.$on('tapped', function onTapped() {
                 if(GameValues.GAMEMODE === GameConstants.GAME_MODE.INTRO){
 

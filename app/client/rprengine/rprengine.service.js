@@ -81,7 +81,7 @@
                 },
                 reset: function () {
                     this.send('engineResetted', {});
-                    this.view.zoom = 1;
+                    //this.view.zoom = 1;
                     this.pickupCount = 0;
                     this.levelCount = 0;
                 },
@@ -121,7 +121,7 @@
                     this.isPlaying = false;
                     this.isDying = true;
                     SegmentManagerService.chillMode = true;
-
+                    GameValues.GAMEMODE = GameConstants.GAME_MODE.GAME_OVER;
                     //var nHighscore = this.LocalStorage.get('highscore');
                     //if(!nHighscore || this.score > nHighscore) {
                         //this.LocalStorage.store('highscore', this.score);
@@ -130,6 +130,41 @@
 
                     //this.onGameover();
                     this.send('gameover');
+                },
+                pickup: function() {
+                    if(SteveValues.STEVE.isDead) {
+                        return;
+                    }
+
+                    this.score += 10;
+
+                    if(RprEngineValues.JOYRIDEMODE)
+                    {
+                        //FidoAudio.stop('pickup');
+                        //FidoAudio.play('pickup');
+                        return;
+                    }
+
+                    this.send('scorejump');
+                    this.pickupCount++;
+
+                    //FidoAudio.stop('pickup');
+                    //FidoAudio.play('pickup');
+
+                    if(this.pickupCount >= 50 * this.bulletMult && !SteveValues.STEVE.isDead) {
+                        this.pickupCount = 0;
+                        this.joyrideMode = true;
+                        RprEngineValues.JOYRIDEMODE = true;
+                        this.joyrideCountdown = 60 * 10;
+                        this.view.joyrideMode();
+                        SteveValues.STEVE.joyrideMode();
+                        SteveValues.STEVE.position.x = 0;
+                        GameValues.CAMERA.x = SteveValues.STEVE.position.x - 100;
+                        EnemyManagerService.destroyAll();
+                        PickupManagerService.destroyAll();
+                        FloorManagerService.destroyAll();
+                        SegmentManagerService.reset();
+                    }
                 }
             }
             return factory;

@@ -54,7 +54,7 @@
             });
 
             $scope.$on('normalmode', function normalmodeEvent() {
-                vm.container.removeChild(this.background);
+                vm.container.removeChild(vm.background);
                 vm.background = vm.normalBackground;
                 vm.container.addChildAt(vm.background, 0);
             });

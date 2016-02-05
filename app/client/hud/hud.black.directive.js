@@ -25,9 +25,9 @@
             //
         }
 
-        HudBlackViewController.$inject = ['$rootScope', '$scope', 'RprEngineService', 'ResizeService'];
+        HudBlackViewController.$inject = ['$rootScope', '$scope', 'RprEngineService', 'ResizeService', 'SteveValues'];
 
-        function HudBlackViewController($rootScope, $scope, RprEngineService, ResizeService) {
+        function HudBlackViewController($rootScope, $scope, RprEngineService, ResizeService, SteveValues) {
             var vm = this;
 
             vm.engine = RprEngineService;
@@ -70,16 +70,16 @@
                             vm.engine.joyrideComplete();
                             SteveValues.STEVE.position.x = 0;
                             GameValues.CAMERA.x = SteveValues.STEVE.position.x - 100;
-                            this.engine.reset();
-                            GameValues.GAME_MODE = GameConstants.GAME_MODE.COUNT_DOWN;
-                            TWEEN.Tween.kill(GameValues.CAMERA);
+                            vm.engine.reset();
+                            GameValues.GAMEMODE = GameConstants.GAME_MODE.COUNT_DOWN;
+                            TWEEN.remove(GameValues.CAMERA);
                             GameValues.CAMERA.zoom = 1;
 
                             new TWEEN.Tween(vm.black).to({
                                     alpha: 0
                                 }, 300)
                                 .onComplete(function() {
-                                    this.engine.start();
+                                    vm.engine.start();
                                     //FidoAudio.fadeIn('gameMusic');
                                     vm.engine.countdown();
                                 }).start();
@@ -87,7 +87,7 @@
                         .start();
                 } else {
 
-                }
+                }console.log(2222, 'xxxx', GameValues.GAMEMODE, 'xxxx')
             });
 
             ResizeService.subscribe($rootScope, resized);

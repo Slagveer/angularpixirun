@@ -29,13 +29,17 @@
 
         function HudScoreViewController($rootScope, $scope, RprEngineService, ResizeService) {
             var vm = this;
-            
+
             vm.engine = RprEngineService;
             AssetsLoadService.load(GameConstants.GAME_ASSETS).then(function(){
                 vm.score = new GAME.Score();
                 vm.score.position.x = 300;
                 vm.score.alpha = 0;
                 vm.container.addChild(vm.score);
+            });
+
+            $scope.$on('scorejump', function updateEvent() {
+                vm.score.jump();
             });
 
             $scope.$on('update', function updateEvent() {
