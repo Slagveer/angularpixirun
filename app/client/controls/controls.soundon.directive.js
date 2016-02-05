@@ -29,7 +29,7 @@
 
         function ControlsSoundOnButtonController($scope, RprEngineService) {
             var vm = this;
-            
+
             vm.engine = RprEngineService;
             AssetsLoadService.load(GameConstants.GAME_ASSETS).then(function(){
                 vm.soundOnButton = new PIXI.Sprite.fromImage("soundOn.png");
@@ -40,7 +40,8 @@
                 vm.soundOnButton.type = "button";
                 vm.soundOnButton.mousedown = vm.soundOnButton.touchstart = function(event) {
                     event.stopPropagation();
-                    $rootScope.$broadcast('soundOnPressed');
+                    //$rootScope.$broadcast('soundOnPressed');
+                    vm.engine.soundon();
                 }
                 vm.container.addChild(vm.soundOnButton);
             });

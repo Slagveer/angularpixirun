@@ -87,7 +87,7 @@
                         .start();
                 } else {
 
-                }console.log(2222, 'xxxx', GameValues.GAMEMODE, 'xxxx')
+                }
             });
 
             ResizeService.subscribe($rootScope, resized);

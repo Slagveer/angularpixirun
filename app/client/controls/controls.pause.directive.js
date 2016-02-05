@@ -48,7 +48,8 @@
                         }, 500)
                         .easing(TWEEN.Easing.Elastic.Out)
                         .start();
-                    $rootScope.$broadcast('pausePressed');
+                    //$rootScope.$broadcast('pausePressed');
+                    vm.engine.pausing();
                 }
                 vm.container.addChild(vm.pauseButton);
             });

@@ -85,6 +85,12 @@
                     this.pickupCount = 0;
                     this.levelCount = 0;
                 },
+                pausing: function () {
+                    this.send('pausePressed', {});
+                },
+                soundon: function () {
+                    this.send('soundOnPressed', {});
+                },
                 tap: function () {
                     this.send('tapped', {});
                 },

@@ -49,7 +49,9 @@
             });
 
             $scope.$on('update', function updateEvent() {
-                //
+                if(GameValues.GAMEMODE === GameConstants.GAME_MODE.COUNT_DOWN) {
+                    vm.logo.visible = false;
+                }
             });
 
             $scope.$on('showgameover', function showgameoverEvent() {
