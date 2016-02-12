@@ -23,7 +23,7 @@ describe('Root router', function () {
     it('redirects to otherwise page', function() {
         location.path('/nonExistentPath');
         rootScope.$emit("$locationChangeSuccess");
-        expect(location.path()).toBe("/");
+        expect(location.path()).toBe("/stresstest");
     });
 
     it('does not redirect to otherwise page', function() {

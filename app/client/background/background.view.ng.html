@@ -1,0 +1,10 @@
+<background-foggy-trees container="backgroundViewController.background"></background-foggy-trees>
+<background-rear-silhouette container="backgroundViewController.background"></background-rear-silhouette>
+<background-tree container="backgroundViewController.background" image="02_tree_1.png"></background-tree>
+<background-tree container="backgroundViewController.background" image="02_tree_2.png" y="50"></background-tree>
+<background-rear-canopy container="backgroundViewController.background"></background-rear-canopy>
+<background-far-canopy container="backgroundViewController.background"></background-far-canopy>
+<background-vine container="backgroundViewController.background"
+                 ng-repeat="vine in backgroundViewController.vines track by $index" image="{{vine}}" nr="{{$index}}"></background-vine>
+<background-roof-leaves container="backgroundViewController.background"></background-roof-leaves>
+<background-front-silhouette container="backgroundViewController.background"></background-front-silhouette>

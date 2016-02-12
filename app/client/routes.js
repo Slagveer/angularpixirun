@@ -29,5 +29,5 @@ angular.module('angularPixirun').config(['$stateProvider', '$urlRouterProvider',
         url: '/'
       });
 
-    $urlRouterProvider.otherwise("/");
+    //$urlRouterProvider.otherwise("/tweets");
   }]);
