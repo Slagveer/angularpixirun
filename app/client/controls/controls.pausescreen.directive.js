@@ -25,9 +25,9 @@
             //
         }
 
-        ControlsPauseScreenController.$inject = ['$scope', 'RprEngineService'];
+        ControlsPauseScreenController.$inject = ['$rootScope', '$scope', 'RprEngineService', 'ResizeService'];
 
-        function ControlsPauseScreenController($scope, RprEngineService) {
+        function ControlsPauseScreenController($rootScope, $scope, RprEngineService, ResizeService) {
             var vm = this;
 
             vm.engine = RprEngineService;
@@ -42,17 +42,24 @@
                 vm.container.addChild(vm.pauseScreen);
             });
 
-            $scope.$on('showPause', function showPaused() {
-                vm.pauseButton.visible = true;
-                new TWEEN.Tween(vm.pauseButton).to({
+            $scope.$on('pausePressed', function pausePressed() { console.log(3333)
+                vm.pauseScreen.visible = true;
+                new TWEEN.Tween(vm.pauseScreen).to({
                         alpha: 1
                     }, 600)
                     .onComplete(function onCompleted(){
-                        vm.pauseButton.interactive = true;
+                        vm.pauseScreen.interactive = true;
                     })
                     .start();
 
             });
+
+            ResizeService.subscribe($rootScope, resized);
+
+            function resized(event, data) {
+                vm.pauseScreen.position.x = (ResizeService.newWidth * 0.5);
+                vm.pauseScreen.position.y = ResizeService.h * 0.5;
+            }
 
             $scope.$on('update', function updateEvent() {
                 //console.log(vm.container);

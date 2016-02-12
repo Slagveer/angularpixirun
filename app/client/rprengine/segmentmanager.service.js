@@ -23,7 +23,7 @@
                 chillMode: true,
                 last: 0,
                 position: 0,
-                dontReset: true,
+                dontReset: false,
                 send: function (msg, data) {
                     $rootScope.$broadcast(msg, data);
                 },
@@ -37,7 +37,7 @@
                     this.position = GameValues.CAMERA.x + 800 * 2;
                     relativePosition = this.position - this.currentSegment.start;
                     if(relativePosition > this.currentSegment.length) {
-                        if(RprEngineValues.joyrideMode) {
+                        if(RprEngineValues.JOYRIDEMODE) {
                             nextSegment = this.startSegment;
                             nextSegment.start = this.currentSegment.start + this.currentSegment.length;
                             this.currentSegment = nextSegment;

@@ -25,9 +25,9 @@
             //
         }
 
-        ControlsPauseButtonController.$inject = ['$scope', 'RprEngineService'];
+        ControlsPauseButtonController.$inject = ['$rootScope', '$scope', 'RprEngineService', 'ResizeService'];
 
-        function ControlsPauseButtonController($scope, RprEngineService) {
+        function ControlsPauseButtonController($rootScope, $scope, RprEngineService, ResizeService) {
             var vm = this;
 
             vm.engine = RprEngineService;
@@ -53,6 +53,13 @@
                 }
                 vm.container.addChild(vm.pauseButton);
             });
+
+            ResizeService.subscribe($rootScope, resized);
+
+            function resized(event, data) {
+                vm.pauseButton.position.x = ResizeService.newWidth - 60;
+                vm.pauseButton.position.y = ResizeService.h - 60;
+            }
 
             $scope.$on('update', function updateEvent() {
                 //console.log(vm.container);

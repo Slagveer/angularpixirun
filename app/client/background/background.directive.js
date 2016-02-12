@@ -59,6 +59,12 @@
                 vm.container.addChildAt(vm.background, 0);
             });
 
+            $scope.$on('joyridemode', function joyridemodeEvent() {
+                vm.container.removeChild(vm.background);
+                vm.background = vm.joyBackground;
+                vm.container.addChildAt(vm.background, 0);
+            });
+
             ResizeService.subscribe($rootScope, resized);
 
             function resized(event, data) {

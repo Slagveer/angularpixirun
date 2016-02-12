@@ -67,7 +67,7 @@ GAME.Steve.prototype.joyrideMode = function()
 	this.joyRiding = true;
     //FidoAudio.setVolume('runRegular', 0);
     //FidoAudio.play('hyperMode');
-	TWEEN.Tween(this.speed).to({
+	new TWEEN.Tween(this.speed).to({
             x : 20
         }, 300)
         .easing(TWEEN.Easing.Cubic.In)

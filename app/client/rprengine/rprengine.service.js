@@ -115,12 +115,17 @@
                 setstevenormalmode: function() {
                     this.send('stevenormalmode');
                 },
+                setJoyRideMode: function() {
+                    this.send('joyridemode');
+                },
                 joyrideComplete: function() {
+                    this.joyrideMode = false;
                     RprEngineValues.JOYRIDEMODE = false;
                     RprEngineValues.PICKUPCOUNT = 0;
                     RprEngineValues.BULLETMULT += 0.3;
                     this.setnormalmode();
                     this.setstevenormalmode();
+                    EnemyManagerService.destroyAll();
                 },
                 gameover: function() {
                     GameValues.isPlaying = false;
@@ -162,7 +167,7 @@
                         this.joyrideMode = true;
                         RprEngineValues.JOYRIDEMODE = true;
                         this.joyrideCountdown = 60 * 10;
-                        this.view.joyrideMode();
+                        this.setJoyRideMode();
                         SteveValues.STEVE.joyrideMode();
                         SteveValues.STEVE.position.x = 0;
                         GameValues.CAMERA.x = SteveValues.STEVE.position.x - 100;

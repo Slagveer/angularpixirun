@@ -32,7 +32,10 @@ GAME.JoyBackground.prototype.updateTransform = function()
 {
 	this.scrollPosition = this.camera.x + 4000;
 
-	this.swoosh.setPosition(this.scrollPosition);
+	//this.swoosh.setPosition(this.scrollPosition);
+    this.emit('backgroundUpdated', {
+        scrollPosition: this.scrollPosition
+    });
 	PIXI.Container.prototype.updateTransform.call( this );
 }
 

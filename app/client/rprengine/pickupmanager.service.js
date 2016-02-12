@@ -24,8 +24,8 @@
                         if(this.spawnCount > 5)
                         {
                             this.pos += 0.15;
-                            this.spawnCount = 0;
-                            //this.addPickup(GameValues.CAMERA.x + GameValues.CAMERA.width, 280 + Math.sin(this.pos) * 180)
+                            this.spawnCount = 0; console.log(GameValues.CAMERA.x)
+                            this.addPickup(GameValues.CAMERA.x + GameValues.CAMERA.width, 280 + Math.sin(this.pos) * 180);
                         }
                     }
                     for(var i=0;i<this.pickups.length;i++) {
@@ -53,7 +53,7 @@
                         }
                     }
                 },
-                addPickup: function(x, y) {
+                addPickup: function(x, y) { console.log(x,y)
                     var pickup = this.pickupPool.getObject();
 
                     pickup.time = TimeService;
@@ -82,6 +82,7 @@
 
                         this.pickupPool.returnObject(pickup);
                         //this.engine.view.game.removeChild(pickup.view);
+                        this.send('removePickup', pickup);
                     }
                     this.pickups = [];
                 },
@@ -92,6 +93,7 @@
                         if(pickup.x > this.camera.x + this.resizer.width) {
                             this.pickupPool.returnObject(pickup);
                             //this.engine.view.game.removeChild(pickup.view);
+                            this.send('removePickup', pickup);
                             this.pickups.splice(i, 1);
                             i--;
                         }

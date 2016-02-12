@@ -183,6 +183,8 @@
 
                 vm.white.scale.x = ResizeService.newWidth/16;
                 vm.white.scale.y = ResizeService.height/16;
+
+                GameValues.CAMERA.width = ResizeService.width;
             }
 
             function joyrideComplete() {
@@ -208,6 +210,21 @@
                     .easing(TWEEN.Easing.Sine.Out)
                     .start();
             }
+
+            function joyrideMode () {
+                this.engine.setJoyRideMode();
+
+                vm.stage.addChild(vm.white);
+                vm.white.alpha = 1;
+
+                new TWEEN.Tween(this.white).to({
+                        alpha: 0
+                    }, 700)
+                    .easing(TWEEN.easing.Sine.Out)
+                    .start();
+
+            }
+
         }
 
         return directive;
